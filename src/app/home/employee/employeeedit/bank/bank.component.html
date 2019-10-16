@@ -1,0 +1,242 @@
+  <!-- bank starts -->
+  
+    <br>
+
+    <div class="row ">
+      <div class="col-md-11 " style="margin-bottom: 25px;">
+        <form class="form-inline ">
+          <div class="input-group ">
+            <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+            <div class="input-group-btn">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-1 " style="padding-left:40px">
+        <div class="input-group add">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalBank" (click)="AddBank(newUserFormBank)">
+            Add
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+      <table class="table  table-condensed tile">
+        <thead>
+          <tr>
+            <th>Emp Id</th>
+            <th>Bank account no</th>
+            <th>Bank Name</th>
+            <th>Bank City</th>
+            <th>Bank branch</th>
+            <th>Ifsc code</th>
+            <th>Account Status</th>
+
+            <th>Is active</th>
+            <th>Edit</th>
+            <th>delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bank of bankdt| filter:key | paginate: { itemsPerPage: 100, currentPage:skillpage }; let i=index">
+            <td>
+              <div *ngIf="!bank.isEditable">
+                {{bank.employee_id}}
+              </div>
+
+            </td>
+
+            <td>{{bank.bank_account_no}}</td>
+            <td>{{bank.bank_name}}</td>
+            <td>{{bank.bank_city}}</td>
+            <td>{{bank.bank_branch}}</td>
+            <td>{{bank.bank_ifsc_code}}</td>
+            <td>{{bank.bank_account_status}}</td>
+            <td>{{bank.is_active}}</td>
+
+
+            <td>
+              <img src="assets/pe.png" width="35px" data-toggle="modal" data-target="#myModalBank" (click)=" getbankdetailsbyId(bank)"> </td>
+            <td>
+              <img src="assets/delete.png" width="20px" (click)="deletebanktddetails(bank);">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="modal right fade" id="myModalBank" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h3>Bank Details</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormBank.reset()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+
+          </div>
+
+          <div class="modal-body">
+
+            <form class="tile" #newUserFormBank="ngForm" (ngSubmit)="onSubmitBank(newUserFormBank)" autocomplete="on">
+              <div class="row">
+                  <div class="col-md-6" *ngIf="isupdateDependent">
+                      <div class="form-group">
+                        <label> Emp Id: <span [(ngModel)]="bankdetailss.employee_id" name="employee_id">{{bankdetailss.employee_id}}</span></label>
+                        <!-- <input type="" class="form-control" [(ngModel)]="bankdetailss.employee_id" name="employee_id" required placeholder="Emp Id"> -->
+                      </div>
+                    </div>
+                <div class="col-md-6" *ngIf="createdByDependent">
+                  <div class="form-group">
+                    <label> Emp Id: <span [(ngModel)]="bankdetailss.employee_id" name="employee_id">{{eid}}</span></label>
+                    <!-- <input type="text" class="form-control" [(ngModel)]="bankdetailss.employee_id" name="employee_id" required placeholder="Emp Id"> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label> Bank Account No:</label>
+
+                    <input type="number" class="form-control" pattern="[0-9]{9,18}" [(ngModel)]="bankdetailss.bank_account_no" name="bank_account_no" required placeholder="Bank Account No" #bankno="ngModel" >
+                    <span style="color:red" *ngIf="bankno.invalid && bankno.touched ">
+                        <span *ngIf="bankno.errors.required">
+                        Bank Account No is required.
+                      </span>
+                      <span *ngIf="bankno.errors.pattern">
+                        Enter 18 digits.
+                      </span>
+                      <span *ngIf="bankno.errors.minlength">
+                        Please enter 18 digits.
+                      </span>  
+                    </span>    
+
+
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Bank Name:</label>
+                    <input type="text" class="form-control" [(ngModel)]="bankdetailss.bank_name" name="bank_name" required pattern="[a-zA-Z ]*" placeholder="Bank Name"
+                      #bankname="ngModel">
+                    <span style="color:red" *ngIf="bankname.invalid && bankname.touched ">
+                      <span *ngIf="bankname.errors.required">
+                        Bank Name is required.
+                      </span>
+                      <span *ngIf="bankname.errors.pattern">
+                        Enter alphabets only.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label> Bank City:</label>
+                    <input type="text" class="form-control" [(ngModel)]="bankdetailss.bank_city" name="bank_city" required pattern="[a-zA-Z ]*" placeholder="Bank City"
+                      #bankcity="ngModel">
+                    <span style="color:red" *ngIf="bankcity.invalid &&bankcity.touched ">
+                      <span *ngIf="bankcity.errors.required">
+                        Bank Name is required.
+                      </span>
+                      <span *ngIf="bankcity.errors.pattern">
+                        Enter alphabets only.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label> Bank Branch:</label>
+                    <input type="text" class="form-control" [(ngModel)]="bankdetailss.bank_branch"  pattern="[a-zA-Z ]*"name="bank_branch" required  placeholder=" Bank Branch"
+                    #bankbranch="ngModel">
+                    <span style="color:red" *ngIf="bankbranch.invalid &&bankbranch.touched ">
+                      <span *ngIf="bankbranch.errors.required">
+                        Bank Branch is required.
+                      </span>
+                      <span *ngIf="bankbranch.errors.pattern">
+                        Enter alphabets only.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Ifsc code:</label>
+                    <input type="text" class="form-control" [(ngModel)]="bankdetailss.bank_ifsc_code" name="bank_ifsc_code" required 
+                      placeholder=" Ifsc code" #ifscCode="ngModel" pattern="^[A-Za-z]{4}[a-zA-Z0-9]{7}$">
+                    <!-- [A-Z|a-z]{4}[0][\d]{6}$ ^[A-Za-z]{4}0[A-Z0-9a-z]{6}$  ("^[^\s]{4}\d{7}$")-->
+                    <span style="color:red" *ngIf="ifscCode.invalid &&ifscCode.touched ">
+                      <span *ngIf="ifscCode.errors.required">
+                        Ifsc code is required.
+                      </span>
+                      <span *ngIf="ifscCode.errors.pattern">
+                        Enter Valid ifsc code.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+
+
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label> Account Status:</label>
+                    <input type="text" class="form-control" [(ngModel)]="bankdetailss.bank_account_status" name="bank_account_status" required placeholder="Account Status"
+                      #accountstatus="ngModel">
+                    <span style="color:red" *ngIf="accountstatus.invalid &&accountstatus.touched ">
+                      <span *ngIf="accountstatus.errors.required">
+                        Account Status is required.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="sel2">Is active:</label>
+                    <select class="form-control" id="sel2" [(ngModel)]="bankdetailss.is_active" name="is_active" required placeholder="Is active" #active="ngModel">
+                      <option>true</option>
+                      <option>false</option>
+                    </select>
+
+                    <span style="color:red" *ngIf="active.invalid &&active.touched ">
+                      <span *ngIf="active.errors.required">
+                        Is active is required.
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              
+
+              </div>
+
+              <button type="submit"  class="btn btn-primary float-right margin" [disabled]="newUserFormBank.form.invalid" *ngIf="!isupdateDependent"  (click)="Onsavebank()"  data-dismiss="modal">Save</button>
+              <button type="submit"   class="btn btn-primary float-right margin" [disabled]="newUserFormBank.form.invalid" *ngIf="isupdateDependent" (click)="updatebankdetails()"  data-dismiss="modal">update</button>
+
+              <button class="btn btn-primary  float-right" (click)="newUserFormBank.reset()">Clear</button>
+
+              <button class="btn btn-info" data-dismiss="modal" aria-label="Close"  (click)="savedata();">Back</button>
+            </form>
+
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+  <!-- bank data ends -->
+<!-- ts bank details -->

@@ -1,0 +1,383 @@
+<!-- <p>
+  kye works!
+</p> -->
+<!-- kye starts --> 
+<!-- <div class="tab-pane fade  " id="nav-kye" role="tabpanel" aria-labelledby="nav-kye-tab"> -->
+  <br>
+
+  <!-- modal -->
+<div class="modal right fade" id="myModal02" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+   <div class="modal-dialog" role="document">
+     <div class="modal-content">
+
+       <div class="modal-header">
+       
+         <!-- <h4 class="modal-title" id="myModalLabel2">Employee Experience</h4> -->
+         <h3>Employee KYE</h3>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormKye.reset()">
+           <span aria-hidden="true">&times;</span></button> 
+       </div>
+
+       <div class="modal-body">
+         <form class="tile"  #newUserFormKye="ngForm" (ngSubmit)="onSubmit(newUserFormKye)">
+           <div class="row">
+             <div class="col-md-6">
+                
+
+                     <div class="form-group" *ngIf=isUpdate >
+                       <label> Emp Id: </label>
+                      
+                       <span><b>{{empkyedetails.employee_Id}}</b></span>
+                       <!-- <input type="text" class="form-control" [(ngModel)]="empkyedetails.employee_Id" name="empid"
+                       required placeholder="Emp Id" #empid4="ngModel" disabled>
+                       <span style="color:red" *ngIf="empid4.invalid && empid4.touched ">
+                       
+                          <span *ngIf="empid4.errors.required">
+                           Empoyee id is required.
+                          </span>
+                          
+                        </span> -->
+                     </div>
+
+
+                     <div class="form-group" *ngIf=!isUpdate>
+                        <label> Emp Id: </label>
+                        <span><b>{{eid}}</b></span>
+                        <!-- <label> Emp Id: </label>
+                        <input type="text" class="form-control" [(ngModel)]="empkyedetails.employee_Id" name="empkyedetails.employee_Id"
+                        required placeholder="Emp Id" #empkye1="ngModel">
+                        <span style="color:red" *ngIf="empkye1.invalid && empkye1.touched ">
+                        
+                           <span *ngIf="empkye1.errors.required">
+                            Empoyee id is required.
+                           </span>
+                           
+                         </span> -->
+                      </div>
+                    </div>
+                   
+
+                   
+
+                  
+           </div>
+                 
+                 
+         
+           <div class="row">
+                <div class="col-md-6">
+                   <div class="form-group">
+                       <label> UAN: </label>
+                       <input type="text" class="form-control" [(ngModel)]="empkyedetails.uan" name="empkyedetails.uan"
+                       required placeholder="1234 5678 9123" #empkye2="ngModel"  minlength="12" maxlength="12" 
+                       pattern="^\d{4}\s\d{4}\s\d{4}$">
+                       <span style="color:red" *ngIf="empkye2.invalid && empkye2.touched ">
+                       
+                          <span *ngIf="empkye2.errors.required">
+                           UAN is required.
+                          </span>
+
+                          <span *ngIf="empkye2.errors.minlength">
+                              Minimum 12 numbers are required.
+                            </span>
+                            
+                           <!-- <span *ngIf="empkye2.errors.pattern">
+                              Only numbers are required.
+                            </span>  -->
+                          
+                        </span>
+                     </div>
+                    </div> 
+               
+
+              <div class="col-md-6">
+                 <!-- <div class="form-group" *ngIf=!isUpdate>
+                     <label> Created By: </label>
+                     <input type="text" class="form-control" [(ngModel)]="empkyedetails.created_by" name="empname2" 
+                     required placeholder="Created By"  #empid3="ngModel">
+                     <span style="color:red" *ngIf="empid3.invalid && empid3.touched ">
+                     
+                        <span *ngIf="empid3.errors.required">
+                           Created By Id is required.
+                        </span>
+                        
+                      </span>
+                   </div> -->
+
+
+
+                 
+                    <div class="form-group">
+                        <label> Place Of Issue: </label>
+                        <select class="form-control" [(ngModel)]="empkyedetails.place_of_issue" name="empkyedetails.place_of_issue" 
+                        required placeholder=" Place Of Issue"  #empkye3="ngModel">
+                       <option *ngFor="let passport of passportCenterList" [value]="passport.id"> {{passport.centerName}}</option>
+                     </select>
+                        <!-- <input type="number" class="form-control" [(ngModel)]="empkyedetails.place_of_issue" name="empname8" 
+                        required placeholder=" Place Of Issue"  #empid9="ngModel">-->
+                        <span style="color:red" *ngIf="empkye3.invalid && empkye3.touched ">
+                        
+                           <span *ngIf="empkye3.errors.required">
+                             Place of issue is required.
+                           </span>
+
+                           
+                           
+                         </span> 
+                      </div>
+                  
+
+
+                   
+
+
+                   <!-- <div class="form-group" *ngIf=isUpdate> -->
+                     <!-- <label> Updated by: </label> -->
+                     <!-- <input type="hidden" class="form-control" [(ngModel)]="empkyedetails.updated_by" name="empkyedetails.updated_by" 
+                     required placeholder=" Updated by"   #empkye6="ngModel">
+                     <span style="color:red" *ngIf="empkye6.invalid && empkye6.touched ">
+                     
+                        <span *ngIf="empkye6.errors.required">
+                         Updated by is required.
+                        </span>
+                        
+                      </span>
+                   </div> -->
+                 </div>
+
+
+
+                 
+
+
+              
+            </div>
+
+
+            <div class="row">
+               <div class="col-md-6">
+                   <div class="form-group">
+                       <label> Passport No: </label>
+                       <input type="text" class="form-control" [(ngModel)]="empkyedetails.passport_no" name="empkyedetails.passport_no" 
+                       required placeholder="A1234567" pattern="^[A-Za-z]{1}[0-9]{7}$" minlength=8 maxlength="8" #empkye7="ngModel">
+                       <span style="color:red" *ngIf="empkye7.invalid && empkye7.touched ">
+                       
+                          <span *ngIf="empkye7.errors.required">
+                           Passport no is required.
+                          </span>
+
+                          <span *ngIf="empkye7.errors.pattern">
+                           Enter Numbers only with atlest one alphabet
+                          </span>
+                          
+                          <span *ngIf="empkye7.errors.minlength">
+                            Passport no should contain 8 Characters.
+                           </span>
+                        </span>
+                     </div>
+                    </div>
+                <div class="col-md-6">
+                   <div class="form-group">
+                       <label> Passport Date Of Issue: </label>
+                       <input type="date" class="form-control" [(ngModel)]="empkyedetails.passport_date_of_Issue" name="empkyedetails.passport_date_of_Issue" 
+                       required placeholder="Passport Date Of Issue"  #empkye8="ngModel">
+                       <span style="color:red" *ngIf="empkye8.invalid && empkye8.touched ">
+                       
+                          <span *ngIf="empkye8.errors.required">
+                           Passport port Date of issue is required.
+                          </span>
+                          
+                        </span>
+                     </div>
+                    
+                </div>
+            </div>
+
+                <div class="row">
+                <div class="col-md-6">
+                   <div class="form-group">
+                     <label> KYE Type: </label>
+                     <input type="text" class="form-control" [(ngModel)]="empkyedetails.kYE_Type" name="empkyedetails.kYE_Type"
+                     required placeholder="KYE Type" #empkye9="ngModel">
+                     <span style="color:red" *ngIf="empkye9.invalid && empkye9.touched ">
+                     
+                        <span *ngIf="empkye9.errors.required">
+                         KYE Type is required.
+                        </span>
+                        
+                      </span>
+                   </div>
+                  </div>
+                
+              
+              
+                 
+                       <div class="col-md-6">
+                          <div class="form-group">
+                              <label> Passport Date Of Expire: </label>
+                              <input type ="date" class="form-control" [(ngModel)]="empkyedetails.passport_date_of_expiry" name="empkyedetails.passport_date_of_expiry" 
+                              required placeholder="Passport Date Of Expire" #empkye10="ngModel">
+                             
+                           
+                           <span style="color:red" *ngIf="empkye10.invalid && empkye10.touched ">
+                              
+                             <span *ngIf="empkye10.errors.required">
+                               Please select.
+                             </span>
+                             
+                           </span>
+                            </div>
+                           
+                       </div>
+                      
+
+
+                         </div>
+                         <div class="row">
+                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Passport Address: </label>
+                                    <textarea class="form-control" rows="5" cols="40"
+                                     [(ngModel)]="empkyedetails.passport_address" name="empkyedetails.passport_address"
+                                     required placeholder=" Passport Address"
+                                      #empkye11="ngModel"></textarea>
+                                      <span style="color:red" *ngIf="empkye11.invalid && empkye11.touched ">
+                              
+                                        <span *ngIf="empkye11.errors.required">
+                                          Passport Address required
+                                        </span>
+                                        
+                                      </span>
+                                     
+                                  </div>
+                                 
+                             </div>
+
+                             <div class="col-md-6">
+                                 <div class="form-group">
+                                     <label> KYE Address: </label>
+                                     <textarea class="form-control" rows="5" cols="40"
+                                      class="form-control" [(ngModel)]="empkyedetails.kYE_address" name="empkyedetails.kYE_address" 
+                                     required placeholder="KYE Address"  #empkye12="ngModel"></textarea>
+                                     <span style="color:red" *ngIf="empkye12.invalid && empkye12.touched ">
+                                     
+                                        <span *ngIf="empkye12.errors.required">
+                                         KYE Address is required.
+                                        </span>
+                                        
+                                      </span>
+                                   </div>
+                                  
+                              </div> 
+                         </div>
+
+
+                        
+
+
+                    <!-- <button class="btn btn-primary  float-right margin" >Save</button> -->
+                    <button class="btn btn-primary  float-right margin" type="submit" data-dismiss="modal" aria-label="Close"
+                    *ngIf = !isUpdate (click)="saveEmpKye()" >
+                     Save
+                    </button>
+
+                    <button class="btn btn-primary  float-right margin" type="submit"  data-dismiss="modal" aria-label="Close" 
+                    *ngIf = isUpdate (click)="updatekye(kye)">
+                     Update
+                    </button>
+
+                    <button class="btn btn-primary  float-right" (click)="newUserFormKye.reset()" >Clear</button>
+                   
+                    <button class="btn btn-info" data-dismiss="modal" aria-label="Close">Cancel</button> 
+                  </form> 
+       </div>
+
+     </div><!-- modal-content -->
+   </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+
+<div class="row ">
+   <div class="col-md-11" style="margin-bottom: 25px;">
+     <form class="form-inline ">
+       <div class="input-group ">
+         <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+         <div class="input-group-btn">
+           <h1></h1>
+         </div>
+       </div>
+     </form>
+   </div> 
+   <div class="col-md-1 " style="padding-left:40px">
+   <div class="input-group add">
+     <button type="button" (click)="addeditkye(newUserFormKye)" class="btn btn-primary" data-toggle="modal" 
+     data-target="#myModal02">Add</button>
+     </div>
+   </div>
+</div>
+
+
+<div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+   <table class="table table-condensed  tile">
+     <thead class="two">
+           <tr>                   
+             <th>Emp Id</th>
+             <th>KYE type</th>
+             <th>UAN</th>
+             <th>KYE Address</th>
+             <th>Passport No</th>
+             <th>Passport Date Of Issue</th>
+             <th>Passport Date Of Expiry</th>
+             <th>Place Of Issue</th>
+             <th>Passport Address</th>
+             <!-- <th>Created By</th> -->
+             <th>Edit</th>
+             <th>Delete</th>
+           </tr>
+           </thead>
+           <tr *ngFor = "let kye of empkyearr">
+             <td>
+                {{kye.employee_Id}}
+             </td>
+             <td>
+                {{kye.kYE_Type}} 
+             </td>
+             <td>
+               {{kye.uan}} 
+             </td>
+             <td>
+               {{kye.kYE_address}} 
+             </td>
+             <td>
+               {{kye.passport_no}}     
+             </td>
+             <td>
+               {{kye.passport_date_of_Issue}}
+             </td>
+             <td>
+               {{kye.passport_date_of_expiry}}
+             </td>
+             <td>
+               {{kye.place_of_issue}} 
+             </td>
+             <td>
+               {{kye.passport_address}}
+             </td>
+             <!-- <td>
+               {{kye.created_by}}
+             </td> -->
+             
+             <td><img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModal02" 
+               (click)="editkyebyid(kye)">
+               
+               <!-- <span><button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="user.isEditable" 
+                 (click)="user.isEditable=!user.isEditable">Save</button></span> -->
+               
+               </td>
+               <td><img src = "/assets/delete.png" width="20px" (click)="deleteEmpKye(kye)"></td>
+           </tr>
+           </table>
+</div>
+
+
+<!-- kye ends -->

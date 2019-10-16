@@ -1,0 +1,182 @@
+.margin{
+  margin-left: 10px;
+
+}
+label{
+  font-weight:bold;
+}
+nav > .nav.nav-tabs{
+
+ border: none;
+   color:#fff;
+   background:#272e38;
+   border-radius:0;
+
+}
+nav > div a.nav-item.nav-link,
+nav > div a.nav-item.nav-link.active
+{
+ border: none;
+ //padding: 10px 10px 10px 3px;
+   color:white;
+   background:#009688;
+   border-radius:0;
+   
+}
+
+nav > div a.nav-item.nav-link.active:after
+{
+ content: "";
+ position: relative;
+ bottom: -60px;
+ left: -50%;
+ border: 15px solid transparent;
+
+}
+
+
+nav > div a.nav-item.nav-link:hover,
+
+nav > div a.nav-item.nav-link:focus,
+nav > div a.nav-item.nav-link.active
+
+{
+ border: none;
+   background: #222d32;
+   color:#fff;
+   border-radius:0;
+   transition:background 0.20s linear;
+}
+
+
+
+nav > div a.nav-item.nav-link.active, 
+nav > div a.nav-item.nav-link:hover,
+nav > div a.nav-item.nav-link:focus
+{
+ background: #0d1214;
+ text-decoration: none;
+ color: #fff;
+ 
+}
+nav > div a.nav-item.nav-link{
+ background: #009688;
+ text-decoration: none;
+ color: #fff;
+ 
+
+}
+
+
+
+
+.left{
+ margin-left: 16px;
+}
+
+
+
+//model css starts
+.modal.right .modal-dialog {
+ position: fixed;
+ margin: auto;
+ width:2000px !important;
+ height: 100%;
+ -webkit-transform: translate3d(0%, 0, 0);
+     -ms-transform: translate3d(0%, 0, 0);
+      -o-transform: translate3d(0%, 0, 0);
+         transform: translate3d(0%, 0, 0);
+}
+
+
+.modal.right .modal-content {
+ overflow-y: auto;
+}
+
+
+.modal.right .modal-body {
+ padding: 0px 15px 60px;
+}
+
+
+/*Right*/
+.modal.right.fade .modal-dialog {
+ right: -100px;
+ -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+    -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+      -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+         transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.right.fade.in .modal-dialog {
+ right: -10px;
+}
+.modal-dialog{
+width: 1000px;
+}
+/* ----- MODAL STYLE ----- */
+.modal-content {
+ border-radius: 0;
+ border: none;
+  position: relative;
+ right: 600px;
+ width:1000px;
+}
+
+.modal-header {
+ border-bottom-color: #EEEEEE;
+ background-color: #FAFAFA;
+}
+
+// /* ----- v CAN BE DELETED v ----- */
+body {
+background-color: #78909C;
+}
+.demo {
+padding-top: 600px;
+padding-bottom: 110px;
+}
+.btn-demo {
+margin: 15px;
+padding: 10px 15px;
+border-radius: 0;
+font-size: 16px;
+background-color: #FFFFFF;
+}
+.btn-demo:focus {
+outline: 0;
+}
+
+.modal.right.fade[_ngcontent-c2] .modal-dialog[_ngcontent-c2] {
+// right: 0px;
+transition: opacity 0.3s linear, right 0.3s ease-out;
+top: 55px;
+}
+
+
+
+// #topheader .navbar-nav li > a {
+// 	text-transform: capitalize;
+// 	color: #333;
+// 	transition: background-color .2s, color .2s;
+
+// 	&:hover,
+// 	&:focus {
+// 		background-color: #333;
+// 		color: #fff;
+// 	}
+// }
+
+#topheader .navbar-nav li.active > a {
+background-color: #333;
+color: #fff;
+}
+
+// .Moduleheader li a{
+//   text-decoration: none;
+//   display: inline-block;
+// }
+// .Moduleheader li a{
+//   text-decoration: none;
+//   display: inline-block;
+// }

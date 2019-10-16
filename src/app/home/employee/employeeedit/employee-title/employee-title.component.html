@@ -1,0 +1,245 @@
+<!-- <p>
+  employee-title works!
+</p> -->
+
+<!-- Title starts -->  
+<!-- <div class="tab-pane fade" id="title-details" role="tabpanel" aria-labelledby="nav-title-tab"> -->
+  <br>
+
+ <!-- Modal -->
+ <div class="modal right fade" id="myModal04" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3>Employee Title</h3>
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormtitle.reset()"  ><span aria-hidden="true">&times;</span></button> 
+        <!-- <h4 class="modal-title" id="myModalLabel2">Employee Title</h4> -->
+      </div>
+
+      <div class="modal-body">
+        <form class="tile" #newUserFormtitle="ngForm" (ngSubmit)="onSubmittitle(newUserFormtitle)" autocomplete="on">
+
+
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" *ngIf=!isUpdatedby>
+                    <label> Emp Id: </label>
+                    <span>{{eid}}</span>
+                    <!-- <label> Emp Id: </label>
+                     <input type="text" class="form-control" [(ngModel)]="edittitle.employeeId" name="edittitle.employeeId"
+                    required placeholder="Employee Id" #emptitle1="ngModel">
+                   <span style="color:red" *ngIf="emptitle1.invalid && emptitle1.touched ">
+                   
+                      <span *ngIf="emptitle1.errors.required">
+                          Emp Id  is mandatory.
+                      </span>
+                      
+                    </span>  -->
+                  </div>
+                  <div class="form-group" *ngIf=isUpdatedby>
+                      <label> Emp Id: </label>
+                      <span>{{edittitle.employeeId}}</span>
+                       <!-- <input type="text" class="form-control" [(ngModel)]="edittitle.employeeId" name="empid2"  disabled
+
+                      required placeholder="Employee Id" #empid1="ngModel"> -->
+
+                     <!-- <span style="color:red" *ngIf="empid1.invalid && empid1.touched ">
+                     
+                        <span *ngIf="empid1.errors.required">
+                            Emp Id  is mandatory.
+                        </span>
+                        
+                      </span>  -->
+                    </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-md-6">
+                 <div class="form-group">
+                    <label>Role:</label>
+                          <select class="form-control"  [(ngModel)]="edittitle.role" name="edittitle.role" placeholder="--Select--"
+                          required placeholder="Role" #emptitle3="ngModel">
+                            <option>--Select--</option> 
+                        <option *ngFor ="let rolename of roleManagemenListArr" [value]="rolename.id">{{rolename.roleName}}</option>
+                      </select> 
+                            <!-- <option value="true">developer</option>
+                            <option value="true">testing</option>
+                            </select> -->
+                            <span style="color:red" *ngIf="emptitle3.invalid && emptitle3.touched ">
+                   
+                              <span *ngIf="emptitle3.errors.required">
+                                  Role  is required.
+                              </span>
+                              
+                            </span>
+                
+                     </div>
+            </div>
+                     
+               
+    
+ <div class="col-md-6">
+          <div class="form-group">
+              <label> Title: </label>
+              <input type="text" class="form-control" [(ngModel)]="edittitle.title" name="edittitle.title" 
+              required placeholder="Title" #emptitle4="ngModel">
+              <span style="color:red" *ngIf="emptitle4.invalid && emptitle4.touched ">
+              
+                 <span *ngIf="emptitle4.errors.required">
+                  Title  is mandatory.
+                 </span>
+                 
+               </span>
+            </div>
+            
+          
+      </div> 
+          </div>
+
+          <div class="row">
+              <div class="col-md-6">
+                  <!-- <div class="form-group" *ngIf=!isUpdatedby>
+                      <label> Created By: </label>
+                       <input type="text" class="form-control" [(ngModel)]="edittitle.createdby" name="empid20"  
+                      required placeholder="Created By" #empid02="ngModel">
+                     <span style="color:red" *ngIf="empid02.invalid && empid02.touched ">
+                     
+                        <span *ngIf="empid02.errors.required">
+                            Created by is required.
+                        </span>
+                        
+                      </span> 
+                    </div> -->
+
+                    <div class="form-group" *ngIf=isUpdatedby>
+                      <!-- <label> Updated By: </label> -->
+                       <input type="hidden" class="form-control" [(ngModel)]="edittitle.createdby" name="edittitle.createdby"  
+                      required placeholder="Updated by" #emptitle5="ngModel">
+                     <span style="color:red" *ngIf="emptitle5.invalid && emptitle5.touched ">
+                     
+                        <span *ngIf="emptitle5.errors.required">
+                            Updated by is required.
+                        </span>
+                        
+                      </span> 
+                    </div>
+
+              </div>
+                       
+                 
+      
+            
+                  <div class="col-md-6">
+                      <div class="form-group">
+                          <!-- <label> flag: </label> 
+                           <!-- <select type="text" class="form-control" [(ngModel)]="edittitle.flag" name="flag"  
+                          required placeholder="flag " #empid04="ngModel"> 
+                          <option value="true">true</option>
+                          <option value="true">false</option>
+                          </select> 
+                          <input type="hidden" class="form-control" [(ngModel)]="edittitle.flag" name="edittitle.flag"  
+                          required placeholder="flag " #empid04="ngModel">
+                         <span style="color:red" *ngIf="empid04.invalid && empid04.touched ">
+                         
+                            <span *ngIf="empid04.errors.required">
+                           fh
+                            </span>
+                            
+                          </span>  -->
+                        </div> 
+                  </div>
+             
+        
+            </div>
+      
+       
+      <button class="btn btn-primary  float-right margin" type="submit" *ngIf=!isUpdatedby data-dismiss="modal" aria-label="Close"
+      (click)="saveempTitle()" [disabled]="newUserFormtitle.invalid"> Save </button>
+   
+       
+
+        <button class="btn btn-primary  float-right margin" type="submit" *ngIf=isUpdatedby data-dismiss="modal" aria-label="Close"
+          (click)="updateempTitle(title)"> Update</button>
+           
+            
+      
+      <button class="btn btn-primary  float-right" (click)="newUserFormtitle.reset()" >Clear</button>
+      <button class="btn btn-info" data-dismiss="modal" aria-label="Close" >Cancel</button> 
+
+      </form>  
+      </div>
+
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+
+
+
+
+<div class="row ">
+<div class="col-md-11" style="margin-bottom: 25px;">
+  <form class="form-inline ">
+    <div class="input-group ">
+      <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+      <div class="input-group-btn">
+        <h1></h1>
+      </div>
+    </div>
+  </form>
+</div> 
+<div class="col-md-1 " style="padding-left:40px">
+<div class="input-group add">
+  <button type="button"  class="btn btn-primary" (click)="clickadd(newUserFormtitle)"
+  data-toggle="modal" data-target="#myModal04" >Add</button>
+  
+  </div>
+</div>
+</div>
+
+
+
+<div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+<table class="table table-condensed  tile">
+  <thead class="two">
+        <tr>                   
+          <th>Employee Id</th>
+          <th>Role</th>
+          <th>Title</th>
+          <!-- <th>Created By</th>
+          <th>Created Date</th> -->
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tr *ngFor = "let title of gettitlearr">
+          <td>{{title.employeeId}}</td>
+          <td>
+              {{title.role}}
+          </td>
+          <td>
+              {{title.title}}
+          </td>
+          <!-- <td>
+              {{title.createdby}}
+          </td>
+          <td>
+              {{title.createddate}}
+          </td> -->
+          <!-- <td>
+              {{title.flag}}
+          </td> -->
+
+
+          <td><img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModal04" 
+            (click)="editempTitleid(title)"></td> 
+
+          <td><img src = "/assets/delete.png" width="20px" (click)="deleteempTitle(title)"></td>
+             
+        </tr>
+        </table>
+</div>
+<!-- Title ends -->

@@ -1,0 +1,93 @@
+
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-dashboard"></i> SeparationType</h1>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+    <li class="breadcrumb-item">Masters</li>
+    <li class="breadcrumb-item active"><a routerLink="/dashboard">Dashboard</a></li>
+  </ul>
+</div>
+<div class="row">
+  <form >
+    <input class="form-control"  type="text"  [(ngModel)]="key1"  size="50" name="key1" placeholder="Search"/>
+ </form>
+<div class="add">
+  <button class="btn btn-primary " type="button" (click)="value=!value">Add</button>
+</div>
+</div>
+
+<div class="row top">
+  <table class="table table-condensed  tile">
+      <thead class="two">
+          <tr>
+
+               <th>
+                Separation type
+                </th>
+                <th>Edit</th>
+                <!-- | orderBy: order:reverse:'case-insensitive' -->
+            <!-- <th>Delete</th>         -->
+          </tr>
+          </thead>
+          <tbody>
+              <!-- |filter:key | paginate: { itemsPerPage: 5, currentPage: p } 
+                | orderBy: order:reverse:'case-insensitive'| filter:searchText; let i=index  -->
+                  <tr *ngFor="let separation of separationDetailsList
+                  |filter:key1 | paginate: { itemsPerPage: 5, currentPage: p }
+                  | filter:searchText; let i=index">
+                <!-- <td>
+                    <div *ngIf="!separation.isEditable">
+                        {{separation.separationTypeId}}
+                      </div>
+                      <input type="text" [(ngModel)]="separation.separationTypeId" *ngIf="separation.isEditable"/>
+
+                </td> -->
+
+
+            <td>
+              <div *ngIf="!separation.isEditable">
+              {{separation.separationType}}
+              </div>
+            <input type="text" class="form-control" [(ngModel)]="separation.separationType" *ngIf="separation.isEditable"/>
+          </td>
+
+
+              <td>             
+              <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" 
+              *ngIf="separation.isEditable" (click)="separation.isEditable=!separation.isEditable;
+              updateSeparation(separation);">Update</button>
+              <img src="assets/pe.png" width="30px" (click)='separation.isEditable =!separation.isEditable' 
+              *ngIf="!separation.isEditable">
+              </td>
+
+
+            <!-- <td><img src="assets/delete.png" width="20px" (click)="deleterow(i)"/></td> -->
+          </tr>
+          <tr>
+           <!-- <td>
+            <input id="separationtypeid" name="idlist" [(ngModel)]="separationtypeid" 
+            *ngIf="value" type="text" class="form-control" placeholder="Enter id" required >
+           </td> 
+            -->
+           <td>
+             <input id="separationtype" name="separationtype" [(ngModel)]="separationtype" 
+            *ngIf="value" type="text" class="form-control" placeholder="Enter SeparationType" required >
+           </td>
+
+          <td>
+            <button type="submit" class="btn btn-primary " *ngIf="value" (click)="setSeparation()">Save</button>
+          </td>
+
+           <td>
+             <button type="submit" class="btn btn-primary " *ngIf="value" (click)=cancelbulist()>Cancel</button>
+            </td>
+
+            </tr> 
+            </tbody>
+          </table>
+        </div>
+    <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+
+

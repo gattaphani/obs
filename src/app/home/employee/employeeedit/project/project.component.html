@@ -1,0 +1,520 @@
+<!-- projectDetails starts -->
+  
+  <br>
+
+           <div class="row ">
+            <div class="col-md-11 " style="margin-bottom: 25px;">
+              <form class="form-inline ">
+                <div class="input-group ">
+                  <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                  <div class="input-group-btn">
+                  </div>
+                </div>
+              </form>
+            </div> 
+            <div class="col-md-1 " style="padding-left:40px">
+            <div class="input-group add">
+              <button type="button" class="btn btn-primary" data-toggle="modal" (click)="valueAdd(newUserFormProject)" data-target="#myModalProject">
+                Add
+              </button>
+              </div>
+            </div>
+            </div>
+
+
+           <div class="row top table-responsive"style="margin-right: 0px; margin-left: 0px;">
+              <table  class="table  table-condensed tile" >
+                  <thead>
+                  <tr>
+                      <th>employeeid </th>
+                      <th>Project name</th>
+                      <th>Contract id</th>
+                      <th>Rate id</th>
+                      <th>Start date</th>
+                      <th>end date</th>
+                      <th>Billing id</th>
+                      <th>Project tech stack</th>
+                      <th>Customer</th>
+                      <th>Location</th>
+                      <th>GST Applicable</th>
+                      <th>Project Type</th>
+                      <th>Project Status</th>
+                      <th>BDM Contact</th>
+                       <!-- <th>Flag</th> -->
+                       <!-- <th>created By</th>
+                       <th>updatedBy</th>
+                       <th>created Date</th>
+                       <th>updated Date</th> -->
+                       <th>isinternal</th>
+                       <th>Edit</th>
+                       <th>Delete</th>
+                   </tr>
+                  </thead>
+                  <tbody>
+                
+                   <tr *ngFor="let user of projectDetailsLi | filter:key | paginate: { itemsPerPage: 100, currentPage:skillpage }; let i=index">
+                      <td>
+                          <div *ngIf="!user.isEditable">
+                          {{user.employeeId}}
+                        </div>
+                        <input  class="form-control" type="text" [(ngModel)]="user.idList" *ngIf="user.isEditable"/>
+                        </td>
+                    <td>
+                      <div *ngIf="!user.isEditable">
+                      {{user.projectName}}
+                    </div>
+                    <input  class="form-control" type="text" [(ngModel)]="user.idList" *ngIf="user.isEditable"/>
+                    </td>
+
+                    <td >
+                    <div *ngIf="!user.isEditable">
+                      {{user.contractId}}
+                      </div>
+                      <input class="form-control" type="text" [(ngModel)]="user.userList" *ngIf="user.isEditable"/>
+                    
+                    </td>
+                    <td>
+                    <div *ngIf="!user.isEditable">
+                      {{user.rateId}}
+                    </div>
+                    <input class="form-control" type="text" [(ngModel)]="user.roleList" *ngIf="user.isEditable"/>
+                    </td>
+                    <td>
+                    <div *ngIf="!user.isEditable">
+                      {{user.startDate | date:"M/d/yy"}}
+                    </div>
+                    <input class="form-control" type="text" [(ngModel)]="user.emailList" *ngIf="user.isEditable"/>
+                    </td>
+                    <td>
+                    <div *ngIf="!user.isEditable">
+                      {{user.endDate | date:"M/d/yy"}}
+                    </div>
+                    <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                    </td>
+                    <td>
+                      <div *ngIf="!user.isEditable">
+                        {{user.billingId}}
+                      </div>
+                      <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                      </td>
+                      <!-- <td>
+                      <div *ngIf="!user.isEditable">
+                        {{user.employeeId}}
+                      </div>
+                      <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                      </td> -->
+                      <td>
+                      <div *ngIf="!user.isEditable">
+                        {{user.projectTechStack}}
+                      </div>
+                      <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                      </td>
+                      <td>
+                      <div *ngIf="!user.isEditable">
+                        {{user.customer}}
+                      </div>
+                      <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                      </td>
+                      <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.location}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                        </td>
+                      <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.gstApplicable}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                        </td>
+                        <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.projectType}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                        </td>
+                        <td>
+                          <div *ngIf="!user.isEditable">
+                            {{user.projectStatus}}
+                          </div>
+                          <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                          </td>
+                        <td>
+                          <div *ngIf="!user.isEditable">
+                            {{user.bdmContact}}
+                          </div>
+                          <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                          </td>
+                          <!-- <td>
+                          <div *ngIf="!user.isEditable">
+                            {{user.flag}}
+                          </div>
+                          <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                          </td> -->
+                          <!-- <td>
+                          <div *ngIf="!user.isEditable">
+                            {{user.createdBy}}
+                          </div>
+                          <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                          </td> -->
+                          <!-- <td>
+                            <div *ngIf="!user.isEditable">
+                              {{user.updatedBy}}
+                            </div>
+                            <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                            </td> -->
+                  
+                          <!-- <td>
+                            <div *ngIf="!user.isEditable">
+                              {{user.createdDate}}
+                            </div>
+                            <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                            </td> -->
+                            <!-- <td>
+                              <div *ngIf="!user.isEditable">
+                                {{user.updatedDate}}
+                              </div>
+                              <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                              </td> -->
+                            <td>
+                              <div *ngIf="!user.isEditable">
+                                {{user.isInternal}}
+                              </div>
+                              <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                              </td>
+                            
+                  
+                  
+                  <td>
+                      <!-- <button class="btn btn-primary" (click)='bulist.isEditable =!bulist.isEditable' *ngIf="!bulist.isEditable">Edit</button> -->
+                      <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="user.isEditable" (click)="user.isEditable=!user.isEditable">Save</button>
+                      <img src="assets/pe.png" width="30px" data-toggle="modal" data-target="#myModalProject" (click) = "getdatabyId1(user);" >
+                      </td>
+                     <td><img src="assets/delete.png" width="20px" (click)="deleteproj(user)"/></td>
+                    </tr>
+             
+                  
+                    </tbody>
+                  </table>
+                  
+               
+            </div>
+           
+
+            <div class="modal right fade "   id="myModalProject" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" >
+                <div class="modal-dialog" role="document" >
+                  <div class="modal-content">
+            
+                    <div class="modal-header" >
+                      <h3>Project Details</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"  (click)="newUserFormProject.reset()" ><span aria-hidden="true">&times;</span></button>
+                            
+                    </div>
+            
+                    <div class="modal-body">
+                    
+        <form class="tile "  #newUserFormProject="ngForm" (ngSubmit)="onSubmitProject(newUserFormProject)" autocomplete="on">
+            <div class="row">
+                <div class="col-md-6"  *ngIf="!isUpdate">
+                    <div class="form-group">
+                        <label> Emp Id: <span [(ngModel)]="projectDetailss.employeeId" name="employeeId" #id="ngModel">{{eid}}</span></label>
+                        <!-- <input type="text" class="form-control" [(ngModel)]="projectDetailss.employeeId" name="employeeId" required placeholder="employeeId" > -->
+                     
+                      </div>
+                
+                    </div>
+                  <div class="col-md-6" *ngIf="isUpdate">
+                      <div class="form-group">
+                          <label> Emp Id: <span [(ngModel)]="projectDetailss.employeeId" name="employeeId" #id="ngModel">{{projectDetailss.employeeId}}</span></label>
+      
+    
+                      </div>
+                    </div>
+                  </div>
+          <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Project Name:</label>
+                      <input type="text" class="form-control" [(ngModel)]="projectDetailss.projectName" name="projectName" 
+                      required placeholder="Project Name"
+                      #Project="ngModel">
+                      <span style="color:red" *ngIf="Project.invalid && Project.touched ">
+                      <span *ngIf="Project.errors.required">
+                          Project Name is required.
+                      </span>
+                      </span>
+                      </div>
+               </div>
+              
+           <div class="col-md-4">
+            <div class="form-group">
+              <label>Contract Id:</label>
+              <input type="number" class="form-control" [(ngModel)]="projectDetailss.contractId" name="contractId" 
+              required placeholder="Contract Id"
+              #contract="ngModel">
+              <span style="color:red" *ngIf="contract.invalid && contract.touched ">
+              <span *ngIf="contract.errors.required">
+                Contract Id is required.
+              </span>
+              </span>
+              </div>
+           </div>
+
+           <div class="col-md-4">
+            <div class="form-group">
+              <label>Rate Id:</label>
+              <input type="number" class="form-control" [(ngModel)]="projectDetailss.rateId" name="rateId" 
+              required placeholder="Rate Id"
+              #rate="ngModel">
+              <span style="color:red" *ngIf="rate.invalid && rate.touched ">
+              <span *ngIf="rate.errors.required">
+                Rate Id is required.
+              </span>
+              </span>
+              </div>
+        </div>
+         </div>
+
+         <div class="row">
+             <div class="col-md-4">
+              <div class="form-group">
+                <label>Start Date:</label>
+                <input type="date" class="form-control" [(ngModel)]="projectDetailss.startDate" name="StartDate" required placeholder="Start Date" #startD="ngModel">
+                <span style="color:red" *ngIf="startD.invalid && startD.touched ">
+                <span *ngIf="startD.errors.required">
+                  Start Date is required.
+                </span>
+                </span>
+                </div>
+             </div>
+
+             <div class="col-md-4">
+              <div class="form-group">
+                <label>End Date:</label>
+                <input type="date" class="form-control" [(ngModel)]="projectDetailss.endDate" name="EndDate" required placeholder="End Date" #endD="ngModel">
+                <span style="color:red" *ngIf="endD.invalid && endD.touched ">
+                <span *ngIf="endD.errors.required">
+                  End Date is required.
+                </span>
+                </span>
+                </div>
+                 </div>
+          
+
+   
+               <div class="col-md-4">
+                <div class="form-group">
+                  <label>Billing Id:</label>
+                  <input type="number" class="form-control" [(ngModel)]="projectDetailss.billingId" name="billingId" 
+                  required placeholder="Billing Id"
+                  #billing="ngModel">
+                  <span style="color:red" *ngIf="billing.invalid && billing.touched ">
+                  <span *ngIf="billing.errors.required">
+                    Billing Id is required.
+                  </span>
+                  </span>
+                  </div>
+               </div>
+              </div>
+               <div class="row">
+                            <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Project Tech Stack:</label>
+                            <input type="text" class="form-control" [(ngModel)]="projectDetailss.projectTechStack" name="projectTechStack" 
+                            required placeholder="Project Tech Stack"
+                            #techStack="ngModel">
+                            <span style="color:red" *ngIf="techStack.invalid &&techStack.touched ">
+                            <span *ngIf="techStack.errors.required">
+                              Project Tech Stack is required.
+                            </span>
+                            </span>
+                            </div>
+                     </div>
+                    
+                 <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Customer:</label>
+                    <input type="text" class="form-control" [(ngModel)]="projectDetailss.customer" name="customer" 
+                    required placeholder="Customer"
+                    #custom="ngModel" >
+                    <span style="color:red" *ngIf="custom.invalid && custom.touched ">
+                    <span *ngIf="custom.errors.required">
+                      Customer is required.
+                    </span>
+                    </span>
+                    </div>
+                 </div>
+      
+                 <div class="col-md-4">
+            
+
+
+                    <div class="form-group">
+                      <label for="sel2">Location:</label> 
+                      <select class="form-control" id="sel2" [(ngModel)]="projectDetailss.location" name="location" 
+                      required placeholder="location Applicable"
+                      #locationName="ngModel" required>
+                          <option>--Select--</option>
+                          <option>Mumbai</option>
+                          <option>Pune</option>
+                          <option>Chennai</option>
+                          <option>Hyderabad</option>
+                           </select>
+                   
+                      <span style="color:red" *ngIf="locationName.invalid &&locationName.touched ">
+                      <span *ngIf="locationName.errors.required">
+                        Location is required.
+                      </span>
+                      </span>
+                      </div>
+
+              </div>
+
+                   </div>
+
+                   <div class="row">
+                    <div class="col-md-4">
+                   
+
+                        <div class="form-group">
+                          <label for="sel2">GST Applicable:</label> 
+                          <select class="form-control" id="sel2" [(ngModel)]="projectDetailss.gstApplicable" name="gstApplicable" 
+                          required placeholder="GST Applicable"
+                          #Gst="ngModel" required>
+                              <option value= "true">Yes</option>
+                              <option value="false">No</option>
+                               </select>
+                       
+                          <span style="color:red" *ngIf="Gst.invalid &&Gst.touched ">
+                          <span *ngIf="Gst.errors.required">
+                            GST Applicable is required.
+                          </span>
+                          </span>
+                          </div>
+
+                 </div>
+                
+             <div class="col-md-4">
+              <div class="form-group">
+                <label>Project Type:</label>
+                <input type="text" class="form-control" [(ngModel)]="projectDetailss.projectType" name="projectType" 
+                required placeholder="Project Type"
+                #pType="ngModel" required>
+                <span style="color:red" *ngIf="pType.invalid && pType.touched ">
+                <span *ngIf="pType.errors.required">
+                  Project Type is required.
+                </span>
+                </span>
+                </div>
+             </div>
+  
+             <div class="col-md-4">
+              <div class="form-group">
+                <label>Project Status:</label>
+                <input type="text" class="form-control" [(ngModel)]="projectDetailss.projectStatus" name="projectStatus" 
+                required placeholder="Project Status"
+                #projectS="ngModel" required>
+                <span style="color:red" *ngIf="projectS.invalid && projectS.touched " >
+                <span *ngIf="projectS.errors.required">
+                  Project Status is required.
+                </span>
+                </span>
+                </div>
+          </div>
+           </div>
+           <div class="row">
+              <div class="col-md-4">
+                  <div class="form-group">
+                    <label>BDM Contact:</label>
+                    <input type="text" class="form-control" [(ngModel)]="projectDetailss.bdmContact" name="bdmContact" 
+                    required   placeholder="BDM Contact" #Bdm="ngModel" required>
+                    <span style="color:red" *ngIf="Bdm.invalid &&Bdm.touched ">
+                    <span *ngIf="Bdm.errors.required">
+                        BDM Contact is required.
+                    </span>
+                  
+                   
+                    </span>
+                    </div>
+                 </div>
+            <div class="col-md-4">
+              
+              <div class="form-group">
+                  <label for="sel2">Is internal:</label> 
+                  <select class="form-control" id="sel2" [(ngModel)]="projectDetailss.isInternal" name="isInternal" 
+                  required placeholder="Is internal"
+                  #Internal="ngModel" required>
+                      <option value="true">true</option>
+                      <option value="false">false</option>
+                       </select>
+               
+                  <span style="color:red" *ngIf="Internal.invalid &&Internal.touched ">
+                  <span *ngIf="Internal.errors.required">
+                      Is internal is required.
+                  </span>
+                  </span>
+                  </div>
+
+         </div>
+         <!-- <div class="col-md-4" *ngIf="createdby">
+         <div class="form-group">
+          <label for="sel2">Created By:</label> 
+          <input type="text" class="form-control" id="sel2" [(ngModel)]="projectDetailss.createdBy" name="createdBy" 
+          required placeholder="create"
+          #create="ngModel">
+          <span style="color:red" *ngIf="create.invalid &&create.touched ">
+          <span *ngIf="create.errors.required">
+            create is required.
+          </span>
+          </span>
+          </div>
+        </div> -->
+     
+     </div>
+     <div class="row" >
+        <!-- <div class="col-md-4">
+            <div class="form-group">
+             <label for="sel2">employee id:</label> 
+             <input type="text" class="form-control" id="sel2" [(ngModel)]="projectDetailss.employeeId" name="employeeId" 
+             required placeholder="employee"
+             #employee="ngModel">
+             <span style="color:red" *ngIf="employee.invalid &&employee.touched ">
+             <span *ngIf="employee.errors.required">
+                employeeId is required.
+             </span>
+             </span>
+             </div>
+           </div> -->
+           <!-- <div class="col-md-4" *ngIf="!createdby">
+            <div class="form-group">
+             <label for="sel2">Updated By:</label> 
+             <input type="text" class="form-control" id="sel2" [(ngModel)]="projectDetailss.updatedBy" name="updatedBy" 
+             required placeholder="updatedBy"
+             #create4="ngModel">
+             <span style="color:red" *ngIf="create4.invalid &&create4.touched ">
+             <span *ngIf="create4.errors.required">
+              updatedBy is required.
+             </span>
+             </span>
+             </div>
+           </div> -->
+     </div>
+  
+
+<button type="submit" class="btn btn-primary float-right margin" [disabled]="newUserFormProject.form.invalid" *ngIf="!isUpdate" (click)="setProject();"  data-dismiss="modal">Save</button>
+<button type="submit" class="btn btn-primary float-right margin" [disabled]="newUserFormProject.form.invalid" *ngIf="isUpdate" (click)="updateprojdata(user);"  data-dismiss="modal">Update</button>
+<button class="btn btn-primary  float-right" (click)="newUserFormProject.reset()" >Clear</button>
+                                        
+<button class="btn btn-info" data-dismiss="modal" aria-label="Close" (click)="savedata();">Back</button> 
+               </form>
+                
+
+
+</div>
+</div>
+    
+</div>
+</div>
+
+
+<!-- project Details Ends -->

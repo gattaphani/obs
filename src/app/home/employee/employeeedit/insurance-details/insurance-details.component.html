@@ -1,0 +1,145 @@
+<!-- <p>
+  insurance-details works!
+</p> -->
+ <!--insurance  data starts -->
+ <!-- <div class="tab-pane fade  " id="nav-insurance" role="tabpanel" aria-labelledby="nav-insurance-tab"> -->
+  <br>
+
+
+  <div class="row ">
+    <div class="col-md-11" style="margin-bottom: 25px;">
+      <form class="form-inline ">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+          <div class="input-group-btn">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-1" style="padding-left:40px">
+      <div class="input-group add">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModainsurance">Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+    <table class="table table-condensed tile ">
+      <thead class="two">
+        <tr>
+          <th>Emp Id</th>
+          <th>Plan id</th>
+          <th>cover days</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1234</td>
+          <td>1452</td>
+          <td>60days</td>
+          <td>
+            <img src="assets/pe.png" width="35px" data-toggle="modal" data-target="#myModainsurance"> </td>
+
+
+
+        </tr>
+        <!--    <tr>
+              <td>1234</td>
+            <td>1452</td>
+            <td>90days</td>
+            <td><img src="assets/pe.png" width="35px" data-toggle="modal" data-target="#myModainsurance"> </td>
+         
+               
+           
+             </tr>  -->
+      </tbody>
+    </table>
+
+
+
+
+
+  </div>
+
+  <div class="modal right fade" id="myModainsurance" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h3>Insurance Details</h3>
+
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormIns.reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+
+
+
+        </div>
+
+        <div class="modal-body">
+
+
+
+          <form class="tile" #newUserFormIns="ngForm" (ngSubmit)="onSubmitIns(newUserFormIns)" autocomplete="on">
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label> Emp Id: </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Plan id: </label>
+                  <input type="text" class="form-control" [(ngModel)]=" Employee_Id2" name="Employee_Id2" required placeholder="Plan id" #planid="ngModel">
+                  <span style="color:red" *ngIf="planid.invalid &&planid.touched ">
+                    <span *ngIf="planid.errors.required">
+                      Plan id is required.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Cover Days: </label>
+                  <input type="text" class="form-control" [(ngModel)]=" Employee_Id3" name="Employee_Id3" required placeholder="Cover Days"
+                    #coverdays="ngModel">
+                  <span style="color:red" *ngIf="coverdays.invalid &&coverdays.touched ">
+                    <span *ngIf="coverdays.errors.required">
+                      coverdays is required.
+                    </span>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+            <button type="submit" class="btn btn-primary float-right margin" [disabled]="newUserFormIns.form.invalid">
+              Save
+            </button>
+
+
+            <button class="btn btn-primary  float-right" (click)="newUserFormIns.reset()">Clear</button>
+
+            <button class="btn btn-info" data-dismiss="modal" aria-label="Close"  (click)="savedata();">Back</button>
+
+          </form>
+
+
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- insurance ends -->

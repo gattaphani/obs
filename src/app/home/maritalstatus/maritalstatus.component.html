@@ -1,0 +1,71 @@
+<div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i>Marital Status</h1>
+    </div>
+      <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
+        </ul>
+  </div>
+            <div class="row m-2">
+                <div class="col-md-10 pad" style="margin-bottom: 15px;">
+                  <form class="form-inline ">
+                    <div class="input-group ">
+                      <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                      <div class="input-group-btn">
+                        <h1></h1>
+                      </div>
+                    </div>
+                  </form>
+                </div> 
+                <div class="col-md-1 pad  ml-2" style="margin-bottom: 15px;">
+                    <div class="input-group ">
+                        <button type="submit" (click)="value=!value" class="btn btn-primary">Add</button>
+                      </div>
+                    </div>
+                    </div>
+                    <div class="table" >
+                        <div class="col-md-12">
+                          <div class="tile">
+                            <h3 class="tile-title"></h3>
+                            <div class="table-responsive">
+                              <table class="table " >
+                                <thead>
+          <tr>
+            <th>Marital Status</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bulist of maritalstatuslist | filter:key | paginate: { itemsPerPage: 5, currentPage: p }; let i=index ">
+            <td>
+                <div *ngIf="!bulist.isEditable">
+                    {{bulist.maritalStatus}}
+                    </div>
+                <input type="text" [(ngModel)]="bulist.maritalStatus" *ngIf="bulist.isEditable"/>
+            </td>
+            <td>
+                <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="bulist.isEditable" (click)="bulist.isEditable=!bulist.isEditable">Save</button>
+                <img src="assets/pe.png" width = "30" (click)='bulist.isEditable =!bulist.isEditable' *ngIf="!bulist.isEditable">
+            </td>
+            <td><img src="assets/delete.png" width = "20" (click)="deleterow(i)"/></td>
+          </tr>
+          <tr>
+            <td><input id="businessunit" name="bulist.marital" [(ngModel)]="marital" *ngIf="value" type="text" class="form-control" placeholder="Enter Marital Status" required ></td>
+            <td>
+              <button type="submit" class="btn btn-primary " *ngIf="value" (click)=saveBu()>Save</button>
+              <button type="submit" class="btn btn-default " *ngIf="value" (click)=cancelbulist()>Cancel</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+
+<!-- end-->
+      
+  
+   

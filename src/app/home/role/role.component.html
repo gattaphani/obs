@@ -1,0 +1,84 @@
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-dashboard"></i>Role Management </h1>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+    <li class="breadcrumb-item">Masters</li>
+    <li class="breadcrumb-item active"><a routerLink="/dashboard">Dashboard</a></li>
+  </ul>
+</div>
+
+          <div class="row">
+                  <div class="col-md-11 "style="margin-bottom: 25px;">
+                       <form class="form-inline">
+                           <div class="input-group ">
+                                  <input class="form-control"  type="text"  [(ngModel)]="key1"  size="50" name="key1" placeholder="Search"/>
+                           </div>
+                      </form>
+                  </div>
+                  <div class="col-md-1 "style="padding-left:40px;">
+                          <div class="input-group-btn">
+                           <button class="btn btn-primary"  type="button" (click)="value=!value">Add</button>
+                      </div>   
+                  </div>
+          </div>
+
+      <div class="row top table-responsive"style="margin-right: 0px; margin-left: 0px;">
+           <table class="table table-condensed tile" >
+                     <thead>
+                         <tr>
+                               <th (click)="sort('status')">Role Status</th>
+                               <th>Edit</th>
+                               <!-- <th>Delete</th> -->
+                         </tr>
+                     </thead>
+
+                     <tbody>
+                          
+                       <tr *ngFor="let field of roleManagemenList | orderBy: order:reverse:'case-insensitive' 
+                       |  filter:key1    | paginate: { itemsPerPage: 5, currentPage: p }  ; let i=index">
+                            <td> 
+                                  <div *ngIf="!field.isEditable">               
+                                          {{field.roleName}}
+                                  </div>  
+
+                                  <input type="text" [(ngModel)]="field.roleName" *ngIf="field.isEditable"/>  
+                            </td>
+
+                           <td>
+                              <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="field.isEditable" 
+                              (click)="field.isEditable=!field.isEditable;saveUpdateValue(field);">Update</button>
+                              <img src="assets/pe.png" width="30" (click)='field.isEditable =!field.isEditable'
+                      *ngIf="!field.isEditable">
+                              <!-- <i class="fa fa-pencil" aria-hidden="true"  (click)='field.isEditable =!field.isEditable' *ngIf="!field.isEditable"></i> -->
+                          </td>
+
+                            
+                                <!-- <td><img src="assets/delete.png" width="20" (click)="deleteRole()" /></td> -->
+                                  <!-- <i class="fa fa-trash" aria-hidden="true"  style="color:red" (click)="deleteFieldValue(i)"></i>   -->
+
+                       </tr>         
+              
+                   </tbody>
+
+           <tr>
+       
+              <td>
+                      <input  name="addText" [(ngModel)]="roleName" *ngIf="value" type="text" class="form-control"  size="10" placeholder="Enter Role Status" required >
+                  
+
+                <td> 
+                  <button   class="btn btn-primary" *ngIf="value" (click)=setRole()> Save</button>&nbsp;
+                  <button type="submit" class="btn btn-primary " *ngIf="value" (click)=cancelbulist()>Cancel</button>
+
+                  </td> 
+          </tr>
+
+      </table>
+ 
+     
+
+    </div>
+   
+    <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls> 

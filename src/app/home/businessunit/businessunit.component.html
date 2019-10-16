@@ -1,0 +1,82 @@
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-th-list"></i> Business Unit</h1>
+  </div>
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item">Masters</li>
+        <li class="breadcrumb-item active"><a routerLink="/dashboard">Dashboard</a></li>
+      </ul>
+</div>
+          <div class="row ">
+              <div class="col-md-11" style="margin-bottom: 25px;">
+                <form class="form-inline ">
+                  <div class="input-group ">
+                    <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                  </div>
+                </form>
+              </div> 
+              <div class="col-md-1" style="padding-left:40px;">
+                  <div class="input-group ">
+                      <button type="submit" (click)="value=!value;clear()" class="btn btn-primary">Add</button>
+                  </div>
+              </div>
+         </div>
+					
+                    <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+                      <table class="table table-condensed tile" >
+                        <thead>
+								<tr>
+                    <th>Business Unit</th>
+                 <th>Cost Center</th>
+									<th>Edit</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let bulist of businessUnitList|filter:key|paginate: { itemsPerPage: 5, currentPage: p } | orderBy: order:reverse:'case-insensitive' ; let i=index ">
+                  <td>
+                    <div *ngIf="!bulist.isEditable">
+                        {{bulist.businessUnitName}}
+                  </div>
+                  <input type="text" [(ngModel)]="bulist.businessUnitName" *ngIf="bulist.isEditable"/>
+                </td>
+                  <td>
+                      <div *ngIf="!bulist.isEditable">
+                          {{bulist.costCenterId}}
+                  </div>
+                  <select id="costcenter" name="costcenter" [(ngModel)]="bulist.costCenterId" *ngIf="bulist.isEditable" class='form-control' >
+                      <option value="undefined" selected disabled >--Select--</option>
+                      <option *ngFor="let bulist of coscentergetlist">{{bulist.costCenterCode}}</option>
+                    
+                    </select>
+                    </td>
+                  <td>
+                    <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="bulist.isEditable" (click)="bulist.isEditable=!bulist.isEditable;
+                    saveUpdatedBuData(bulist);">Update</button>
+                    <img src="assets/pe.png" width="35px" (click)='bulist.isEditable =!bulist.isEditable' *ngIf="!bulist.isEditable">
+                    </td>
+                  <!-- <td><img src="assets/delete.png" width="20px" (click)=" deleteBuData(bulist)"/></td> -->
+                </tr>
+                 <tr>
+                 <td><input id="businessunit" name="businessunit" [(ngModel)]="businessUnitName" *ngIf="value" type="text" class="form-control" placeholder="Enter BusinessUnit" required ></td>
+                 <td><select id="costcenter" name="costcenter" [(ngModel)]="costCenterId" *ngIf="value" class='form-control' >
+                    <option value="undefined" selected disabled >--Select--</option>
+                    <option *ngFor="let cc of coscentergetlist">{{cc.costCenterCode}}</option>
+      
+                  </select></td>
+                  <td><button type="submit" class="btn btn-primary " *ngIf="value" (click)=setBusinessunit()>Save</button>
+                    <button type="submit" class="btn btn-default " *ngIf="value" (click)=cancelbulist()>Cancel</button></td>
+                   <td></td>
+                 </tr> 
+                
+									</tbody>
+                </table>
+              
+              
+             
+          </div>
+              
+                <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+
+              

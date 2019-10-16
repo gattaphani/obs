@@ -1,0 +1,233 @@
+    <!-- onbording starts-->
+<br>
+      <div class="row">
+        <div class="col-md-11" style="margin-bottom: 25px;">
+          <form class="form-inline ">
+            <div class="input-group ">
+              <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+              <div class="input-group-btn">
+                <h1></h1>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-md-1" style="padding-left:40px">
+          <div class="input-group ">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4" 
+            (click)="OnSave(newUserFormOnboard)"> Add</button>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+        <table class="table table-condensed  tile">
+          <thead class="two">
+            <tr>
+              <th>employeeId </th>
+              <th>Joining Date</th>
+              <th>resourceType</th>
+              <th>Bond Status</th>
+              <th>Edit</th>
+              <th>delete</th>
+
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr *ngFor = "let onboard of onboarding| filter:key | paginate: { itemsPerPage: 100, currentPage:skillpage }; let i=index">
+              <td>{{onboard.employeeId}}</td>
+              <td>{{onboard.joiningDate  | date:"M/d/yy"}}</td>
+              <td>{{onboard.resourceType}}</td>
+              
+             
+              <td>{{onboard.bondStatus}}</td>
+              <td>
+                <img src="assets/pe.png" width="30" data-toggle="modal" data-target="#myModal4" (click)="getboardingdetailsbyId(onboard)">
+              </td>
+              <td>
+                  <img src="assets/delete.png" width="20px"  (click)="deleteOnbording(onboard)">
+                </td>
+
+     
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="container demo">
+
+
+        <!-- Modal -->
+        <div class="modal right fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModal3">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h3>OnBoarding</h3>
+                <button type="button" class="close" (click)="newUserFormOnboard.reset()" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+
+              </div>
+
+              <div class="modal-body">
+                <form class="tile" #newUserFormOnboard="ngForm" (ngSubmit)="onSubmit1(newUserFormOnboard)" autocomplete="on">
+                  <!-- <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label> Emp Id: </label>
+                        <input type="text" class="form-control" [(ngModel)]="onboarddetailsss.employeeId" name="employeeId" required placeholder="employeeId" #Emp="ngModel">
+                        <span style="color:red" *ngIf="Emp.invalid && Emp.touched ">
+                          <span *ngIf="Emp.errors.required">
+                              Emp Id is required
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="row">
+                    <div class="col-md-6"  *ngIf="createdByDependent">
+                        <div class="form-group">
+                            <label> Emp Id: <span [(ngModel)]="onboarddetailsss.employeeId" name="employeeId" #id="ngModel">{{eid}}</span></label>
+                            <!-- <input type="text" class="form-control" [(ngModel)]="onboarddetailsss.employeeId" name="employeeId" required placeholder="employeeId" > -->
+                         
+                          </div>
+                    
+                        </div>
+                      <div class="col-md-6" *ngIf="isupdateDependent">
+                          <div class="form-group">
+                              <label> Emp Id: <span [(ngModel)]="onboarddetailsss.employeeId" name="employeeId" #id="ngModel">{{onboarddetailsss.employeeId}}</span></label>
+          
+        
+                          </div>
+                        </div>
+                      </div>
+
+
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label>Joining Date: </label>
+                        <input type="date" class="form-control" [(ngModel)]="onboarddetailsss.joiningDate" name="joiningDate" required placeholder="dd/mm/yyyy" #joining="ngModel">
+                        <span style="color:red" *ngIf="joining.invalid && joining.touched ">
+                          <span *ngIf="joining.errors.required">
+                            Joining Date is required
+                          </span>
+                        </span>
+                      </div>
+
+                    </div>
+                     <div class="col-md-4">
+                      <div class="form-group">
+                        <label>resignationDate: </label>
+                        <input type="date" class="form-control" [(ngModel)]="onboarddetailsss.resignationDate" name="resignationDate" required placeholder="dd/mm/yyyy" #registration="ngModel">
+                        <span style="color:red" *ngIf="registration.invalid && registration.touched ">
+                          <span *ngIf="registration.errors.required">
+                            Resignation Date is required
+                          </span>
+                        </span>
+                      </div>
+                    </div> 
+
+                    <div class="col-md-4">
+                  <div class="form-group">
+                        <label>resourceType: </label>
+                      
+                        <select class="form-control" placeholder="Select resource type"  name="resourceType" [(ngModel)]="onboarddetailsss.resourceType"  (change)="selectOption($event.target.value)"  required >
+                          <option>Select </option>
+                          <option *ngFor="let resourcetypelist of getResourceList" [value]="resourcetypelist.id"  >{{ resourcetypelist.resourceTypeName}} </option>
+                          
+                        
+                        </select>
+                      </div>
+                    </div> 
+</div>
+                
+                 <div class="row">
+                   <div class="col-md-4">
+                      <div class="form-group">
+                        <label> Separation Type: </label>
+                        <select class="form-control" [(ngModel)]="onboarddetailsss. separationType" name="separationType"  required placeholder="Separation Type" #separation="ngModel">
+                          <option>Select</option>
+                          <option *ngFor="let separationlist of separationDetailsList" [value]="separationlist.separationTypeId"  >{{ separationlist.separationType}} </option>
+                        </select>
+                        <span style="color:red" *ngIf="separation.invalid && separation.touched ">
+
+                          <span *ngIf="separation.errors.required">
+
+                            Separation type is required.
+                          </span>
+
+                        </span>
+                      </div>
+                    </div> 
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label> Bond Status: </label>
+                      
+                        <select class="form-control" id="sel2" [(ngModel)]=" onboarddetailsss.bondStatus" name="bondStatus" required placeholder="bondStatus" #activ="ngModel">
+                            <option>true</option>
+                            <option>false</option>
+                          </select>
+
+                          <span style="color:red" *ngIf="activ.invalid && activ.touched ">
+
+                              <span *ngIf="activ.errors.required">
+    
+                                Bond Status is required.
+                              </span>
+    
+                            </span>
+                      </div>
+                    </div>
+                
+                   
+                 
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label>Exit Date: </label>
+                            <input type="date" class="form-control" [(ngModel)]="onboarddetailsss.exitDate" name="exitDate" required placeholder="dd/mm/yyyy" #joiningg="ngModel">
+                            <span style="color:red" *ngIf="joiningg.invalid && joiningg.touched ">
+                              <span *ngIf="joiningg.errors.required">
+                                exitDate is required
+                              </span>
+                            </span>
+                          </div>
+    
+                        </div>
+                      
+                    </div>
+  
+
+
+
+                 
+                
+
+                  <button class="btn btn-primary  float-right margin"  (click)="saveemploymentdetails()"  *ngIf="!isupdateDependent" data-dismiss="modal" >Save</button>
+                  <button class="btn btn-primary  float-right margin" *ngIf="isupdateDependent"(click)="updateonboardingdetailss()" data-dismiss="modal">update</button>
+                  <button class="btn btn-primary  float-right " (click)="newUserFormOnboard.reset()">Clear</button>
+                  <button class="btn btn-info" data-dismiss="modal"> <span aria-hidden="true"></span>Back</button>
+                   
+                </form>
+
+
+
+              </div>
+
+            </div>
+            <!-- modal-content -->
+          </div>
+          <!-- modal-dialog -->
+        </div>
+        <!-- modal -->
+
+
+      </div>
+
+
+ 
+    <!-- onbording ends-->
+

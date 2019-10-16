@@ -1,0 +1,547 @@
+<div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i>Insurance</h1>
+    </div>
+      <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
+        </ul>
+  </div>
+            <div class="row m-2">
+                <div class="col-md-10 pad" style="margin-bottom: 15px;">
+                  <form class="form-inline ">
+                    <div class="input-group ">
+                      <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                      <div class="input-group-btn">
+                        <h1></h1>
+                      </div>
+                    </div>
+                  </form>
+                </div> 
+                <div class="col-md-1 pad  ml-2" style="margin-bottom: 25px;">
+                    <div class="input-group ">
+                        <div class="text-left"> &nbsp;&nbsp; &nbsp;
+                   
+                            <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#myModal2"> Add
+                                    </button>
+                                </div>
+                      </div>
+                    </div>
+                    </div>
+              <div class="tabletop table-layout:fixed">
+              <table class="table table-responsive" >
+                  <div class="clearfix"></div>
+                  <div class="col-md-12">
+                    <div class="tile">
+                      <h3 class="tile-title"></h3>
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+              <tr>
+              <th>Employee Id </th>
+              <th>Employee Name</th>
+              <th>Insurance Plan</th>
+              <th>cover days</th>
+              <th>Employee Age</th>
+              <th>Employee Premium</th>
+              <th>Edit</th>
+              <th>Delete</th>
+             </tr>
+          </thead>
+  <tbody *ngFor="let field of dataJson |filter:term|  paginate: { itemsPerPage: 5, currentPage: p } ;let i=index">
+  <tr>
+              <td>
+                 <div *ngIf="!field.isEditable">{{field.EmpId}}</div>
+                 <input type="text" [(ngModel)]="field.EmpId" *ngIf="field.isEditable"/>
+              </td>
+                <td>
+                <div *ngIf="!field.isEditable">{{field.EmpName}}</div>
+                <input type="text" [(ngModel)]="field.EmpName" *ngIf="field.isEditable"/>
+                </td>
+    
+  <td>
+  <div *ngIf="!field.isEditable">{{field.InsurancePlan}}</div>
+  <input type="text" [(ngModel)]="field.InsurancePlan" *ngIf="field.isEditable"/>
+  </td>
+  
+  <td>
+  <div *ngIf="!field.isEditable">{{field.coverdays}}</div>
+  <input type="text" [(ngModel)]="field.coverdays" *ngIf="field.isEditable"/>
+  </td>
+  
+  <td>
+  <div *ngIf="!field.isEditable">{{field.EmpAge}}</div>
+  <input type="text" [(ngModel)]="field.EmpAge" *ngIf="field.isEditable"/>
+  </td>
+  
+  
+  <td>
+  <div *ngIf="!field.isEditable">{{field.EmpPremium}}</div>
+  <input type="text" [(ngModel)]="field.EmpPremium" *ngIf="field.isEditable"/>
+  </td>
+  
+  <td> <img src="assets/pe.png" width = "35"  (click)='field.isEditable =!field.isEditable' *ngIf="!field.isEditable">
+    <button  class="btn btn-primary" *ngIf="field.isEditable" (click)="field.isEditable=!field.isEditable">Update</button>
+  </td>
+    
+   <td>
+       <img src="assets/delete.png" width = "20" (click)="deleteFieldValue(i)"/>
+  </td>
+               </tr>
+                  </tbody>
+                 
+                  </table>
+  
+  <div class="container demo">
+  <div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" >
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                    
+                            <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          
+                            </div> 
+                    
+                                <div class="modal-body">
+                                   
+                                  <form #formdata ="ngForm" (ngSubmit)="saveMe(formdata)">
+                                    <div class="form-group ">
+                                      
+                               <u><h3>Employee Information</h3></u>
+                                    
+                                    </div>
+  
+                                    <div class="form-row">
+                                       
+                                      <div class="form-group col-md-4">
+                                          <label for="inputEmpId" >Employee Id : </label>
+  
+<input type="text" class="form-control custom"  id= "inputEmpId" name="EmpId"  [(ngModel)]="EmpId"  placeholder="emp id">
+  
+                                       </div>
+  
+                                  <div class="form-group col-md-4">
+                                      <label for="exampleFormControlInput1">Employee Name : </label>
+                                      <input type="text" class="form-control custom" id="exampleFormControlInput1" name="EmpName" [(ngModel)]="EmpName" placeholder="emp name">
+                                    </div>
+                            
+                                    <div class="form-group col-md-4">
+                                              <label for="inputSpouse">Employee Age</label>
+                                              <input type="text" class="form-control custom " id="inputSpouse" name="EmpAge"  [(ngModel)]="EmpAge" placeholder="emp age">
+                                             
+                                            </div>
+                                           
+                                          
+                                        </div>&nbsp;
+                              
+                              <div class="">
+                              <u>  <h3 class="modal-title" id="myModalLabel2" >Family Particulars</h3></u>
+                              </div>
+                            
+                                      
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                              <label for="inputSpouse">Spouse Age</label>
+                                              <input type="text" class="form-control custom" id="inputSpouse" name="SpouseAge" [(ngModel)]="SpouseAge" placeholder="spouse Age">
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="inputSpouseAgeBand">Spouse Age Band</label>
+                                             
+                                             
+                                                <select  class="form-control custom" id="inputSpouseAgeBand" name="SpouseAgeBand"  [(ngModel)]="SpouseAgeBand">
+                                                    <option selected>Choose...</option>
+                                                    <option>20-35</option>
+                                                    <option>36-45</option>
+                                                    <option>46-55</option>
+                                                    <option>56-65</option>
+                                                    <option>66-75</option>
+                                                  </select>
+                                           
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="inputS_premium">Spouse Premium</label>
+                                              <input type="text" class="form-control  custom" id="inputsm-6" name="SpousePremium" [(ngModel)]="SpousePremium"  placeholder="Spouse Premium">
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                              <div class="form-group col-md-4">
+                                                <label for="inputChild1">Child 1 Age</label>
+                                                <input type="text" class="form-control custom" id="inputChild1" name="child1Age"  [(ngModel)]="child1Age" placeholder="child1 Age" >
+                                              </div>
+                                              <div class="form-group col-md-4">
+                                                <label for="inputChild1eAgeBand">Child1 Age Band</label>
+                                               
+                      <select  class="form-control custom" id="inputChild1eAgeBand" name="child1AgeBand"   [(ngModel)]="child1AgeBand" >
+                                                      <option selected>Choose...</option>
+                                                      <option>1-15</option>
+                                                      <option>15-25</option>
+                                                      <option>25-35</option>
+                                                      <option>36-45</option>
+                                                      <option>45-55</option>
+                                                    </select>
+                                             
+                                              </div>
+                    <div class="form-group col-md-4">
+                  <label for="inputChild1_premium">Child1 Premium</label>
+                    <input type="text" class="form-control custom " id="inputChild1_premium" name="child1Premium"  [(ngModel)]="child1Premium"  placeholder="Child1 premium">
+                                              </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                  <label for="inputChild2">Child2 Age</label>
+                                                  <input type="text" class="form-control custom" id="inputChild2"  name="child2Age" [(ngModel)]="child2Age" placeholder="child2 Age">
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                  <label for="inputChild2AgeBand">Child2 Age Band</label>
+                                                 
+                                                 
+                                                    <select  class="form-control custom" id="inputChild2AgeBand"   name="child2AgeBand" [(ngModel)]="child2AgeBand" >
+                                                        <option selected>Choose...</option>
+                                                        <option>1-15</option>
+                                                        <option>15-25</option>
+                                                        <option>25-35</option>
+                                                        <option>36-45</option>
+                                                        <option>45-55</option>
+                                                      </select>
+                                               
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                  <label for="inputChild1_premium">Child2 Premium</label>
+                                                  <input type="text" class="form-control custom " id="inputChild1_premium" name="child2Premium"  [(ngModel)]="child2Premium" placeholder="Child2 premium" >
+                                                </div>
+                                              </div>
+  
+                                              <div class="">
+                        <u>  <h3>InsurancePlan Information</h3></u>&nbsp;
+                                              </div>
+                           <div class="form-group col-md-4">
+                              <label for="inputEmployeeAgeBand">Employee Age Band</label>
+                             
+                             
+                                <select  class="form-control custom" id="inputEmployeeAgeBand" name="EmpAgeBand" [(ngModel)]="EmpAgeBand" >
+                                    <option selected>Choose...</option>
+                                    <option>20-35</option>
+                                    <option>36-45</option>
+                                    <option>46-55</option>
+                                    <option>56-65</option>
+                                    <option>66-75</option>
+                                  </select>
+                            </div>
+                             
+                            
+                              <div class="form-row">
+                                  <div class="form-group col-md-4">
+                                      <label for="exampleFormControlSelect1">Insurance Plan</label>
+                                      <select class="form-control custom" id="exampleFormControlSelect1" name="InsurancePlan"  [(ngModel)]="InsurancePlan" >
+                                          <option selected>Choose...</option>
+                                        <option>Plan1</option>
+                                        <option>Plan2</option>
+                                       
+                                      </select>
+                                    </div>
+  
+                                    <div class="form-group col-md-4">
+                                        <label for="inputS_premium">Employee Premium</label>
+                                        <input type="text" class="form-control custom" id="inputsm-6" name="EmpPremium" [(ngModel)]="EmpPremium" placeholder="Employee Premium">
+                                      </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="exampleFormControlInput1">cover days : </label>
+                                        <input type="text" class="form-control custom" id="exampleFormControlInput1" name="coverdays"  [(ngModel)]="coverdays"  placeholder="cover days">
+  
+  
+                                      </div>
+                              </div>
+                              <div class="form-group ">
+                                                  <label for="exampleFormControlInput1">Total GMC  Premium : </label>
+                                                  <input   type="text" class="form-control custom" id="exampleFormControlInput1"   [(ngModel)]="TotalGMCPremium"  placeholder="Total GMC premium">
+                                                </div>
+                                               
+          
+                                <div class="modal-footer">
+                                  
+                                                <button class="btn btn-primary pull-left"  button type="submit"  >Submit</button>
+                                              
+                                                <button type="reset" class="btn btn-warning pull-left"  >Reset</button>  
+                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                              </form>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+           
+
+    </div>
+  
+  </div>
+  <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+
+
+
+
+
+ <!-- <div class="app-title">
+  <div>
+    <h1><i class="fa fa-dashboard"></i> Insurance</h1>
+    <p>Ojas Bussiness Rules Application</p>
+  </div>
+  <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+  </ul>
+</div>
+<div class="row">
+  <div class="col-md-6">
+      <div class="topnav">
+          <input type="text" placeholder="Search..">
+   </div>
+     <br>
+<div class="row">
+  <div class=" table responsive">         
+      <table class="table ">
+         <thead>
+            <tr>
+            <th>Employee Id </th>
+            <th>Employee Name</th>
+            <th>Insurance Plan</th>
+            <th>cover days</th>
+            <th>Employee Age</th>
+            <th>Employee Premium</th>
+            <th>Edit</th>
+            <th>Delete</th>
+           </tr>
+        </thead>
+<tbody *ngFor="let field of dataJson |filter:term|  paginate: { itemsPerPage: 5, currentPage: p } ;let i=index">
+<tr>
+            <td>
+               <div *ngIf="!field.isEditable">{{field.EmpId}}</div>
+               <input type="text" [(ngModel)]="field.EmpId" *ngIf="field.isEditable"/>
+            </td>
+              <td>
+              <div *ngIf="!field.isEditable">{{field.EmpName}}</div>
+              <input type="text" [(ngModel)]="field.EmpName" *ngIf="field.isEditable"/>
+              </td>
+  
+<td>
+<div *ngIf="!field.isEditable">{{field.InsurancePlan}}</div>
+<input type="text" [(ngModel)]="field.InsurancePlan" *ngIf="field.isEditable"/>
+</td>
+
+<td>
+<div *ngIf="!field.isEditable">{{field.coverdays}}</div>
+<input type="text" [(ngModel)]="field.coverdays" *ngIf="field.isEditable"/>
+</td>
+
+<td>
+<div *ngIf="!field.isEditable">{{field.EmpAge}}</div>
+<input type="text" [(ngModel)]="field.EmpAge" *ngIf="field.isEditable"/>
+</td>
+
+
+<td>
+<div *ngIf="!field.isEditable">{{field.EmpPremium}}</div>
+<input type="text" [(ngModel)]="field.EmpPremium" *ngIf="field.isEditable"/>
+</td>
+
+<td> <img src="assets/pen.png" width = "20"  (click)='field.isEditable =!field.isEditable' *ngIf="!field.isEditable">
+  <button  class="btn btn-primary" *ngIf="field.isEditable" (click)="field.isEditable=!field.isEditable">Update</button>
+</td>
+  
+ <td>
+     <img src="assets/delete.png" width = "25" (click)="deleteFieldValue(i)"/>
+</td>
+             </tr>
+                </tbody>
+               
+                </table>
+
+<div class="container demo">
+<div class="text-left"> &nbsp;&nbsp; &nbsp;
+                   
+                <button type="button" class="btn btn-primary pull-left" data-toggle="modal" data-target="#myModal2"><i class="fa fa-plus" aria-hidden="true"></i>
+                        </button>
+                    </div>
+<div class="modal right fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" >
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                  
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        
+                          </div> 
+                  
+                              <div class="modal-body">
+                                 
+                                <form #formdata ="ngForm" (ngSubmit)="saveMe(formdata)">
+                                  <div class="form-group ">
+                                    
+                             <u><h3>Employee Information</h3></u>
+                                  
+                                  </div>
+
+                                  <div class="form-row">
+                                     
+                                    <div class="form-group col-md-4">
+                                        <label for="inputEmpId" >Employee Id : </label>
+
+<input type="text" class="form-control custom"  id= "inputEmpId" name="EmpId"  [(ngModel)]="EmpId"  placeholder="emp id">
+
+                                     </div>
+
+                                <div class="form-group col-md-4">
+                                    <label for="exampleFormControlInput1">Employee Name : </label>
+                                    <input type="text" class="form-control custom" id="exampleFormControlInput1" name="EmpName" [(ngModel)]="EmpName" placeholder="emp name">
+                                  </div>
+                          
+                                  <div class="form-group col-md-4">
+                                            <label for="inputSpouse">Employee Age</label>
+                                            <input type="text" class="form-control custom " id="inputSpouse" name="EmpAge"  [(ngModel)]="EmpAge" placeholder="emp age">
+                                           
+                                          </div>
+                                         
+                                        
+                                      </div>&nbsp;
+                            
+                            <div class="">
+                            <u>  <h3 class="modal-title" id="myModalLabel2" >Family Particulars</h3></u>
+                            </div>
+                          
+                                    
+                                      <div class="form-row">
+                                          <div class="form-group col-md-4">
+                                            <label for="inputSpouse">Spouse Age</label>
+                                            <input type="text" class="form-control custom" id="inputSpouse" name="SpouseAge" [(ngModel)]="SpouseAge" placeholder="spouse Age">
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                            <label for="inputSpouseAgeBand">Spouse Age Band</label>
+                                           
+                                           
+                                              <select  class="form-control custom" id="inputSpouseAgeBand" name="SpouseAgeBand"  [(ngModel)]="SpouseAgeBand">
+                                                  <option selected>Choose...</option>
+                                                  <option>20-35</option>
+                                                  <option>36-45</option>
+                                                  <option>46-55</option>
+                                                  <option>56-65</option>
+                                                  <option>66-75</option>
+                                                </select>
+                                         
+                                          </div>
+                                          <div class="form-group col-md-4">
+                                            <label for="inputS_premium">Spouse Premium</label>
+                                            <input type="text" class="form-control  custom" id="inputsm-6" name="SpousePremium" [(ngModel)]="SpousePremium"  placeholder="Spouse Premium">
+                                          </div>
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                              <label for="inputChild1">Child 1 Age</label>
+                                              <input type="text" class="form-control custom" id="inputChild1" name="child1Age"  [(ngModel)]="child1Age" placeholder="child1 Age" >
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label for="inputChild1eAgeBand">Child1 Age Band</label>
+                                             
+                    <select  class="form-control custom" id="inputChild1eAgeBand" name="child1AgeBand"   [(ngModel)]="child1AgeBand" >
+                                                    <option selected>Choose...</option>
+                                                    <option>1-15</option>
+                                                    <option>15-25</option>
+                                                    <option>25-35</option>
+                                                    <option>36-45</option>
+                                                    <option>45-55</option>
+                                                  </select>
+                                           
+                                            </div>
+                  <div class="form-group col-md-4">
+                <label for="inputChild1_premium">Child1 Premium</label>
+                  <input type="text" class="form-control custom " id="inputChild1_premium" name="child1Premium"  [(ngModel)]="child1Premium"  placeholder="Child1 premium">
+                                            </div>
+                                          </div>
+                                          <div class="form-row">
+                                              <div class="form-group col-md-4">
+                                                <label for="inputChild2">Child2 Age</label>
+                                                <input type="text" class="form-control custom" id="inputChild2"  name="child2Age" [(ngModel)]="child2Age" placeholder="child2 Age">
+                                              </div>
+                                              <div class="form-group col-md-4">
+                                                <label for="inputChild2AgeBand">Child2 Age Band</label>
+                                               
+                                               
+                                                  <select  class="form-control custom" id="inputChild2AgeBand"   name="child2AgeBand" [(ngModel)]="child2AgeBand" >
+                                                      <option selected>Choose...</option>
+                                                      <option>1-15</option>
+                                                      <option>15-25</option>
+                                                      <option>25-35</option>
+                                                      <option>36-45</option>
+                                                      <option>45-55</option>
+                                                    </select>
+                                             
+                                              </div>
+                                              <div class="form-group col-md-4">
+                                                <label for="inputChild1_premium">Child2 Premium</label>
+                                                <input type="text" class="form-control custom " id="inputChild1_premium" name="child2Premium"  [(ngModel)]="child2Premium" placeholder="Child2 premium" >
+                                              </div>
+                                            </div>
+
+                                            <div class="">
+                      <u>  <h3>InsurancePlan Information</h3></u>&nbsp;
+                                            </div>
+                         <div class="form-group col-md-4">
+                            <label for="inputEmployeeAgeBand">Employee Age Band</label>
+                           
+                           
+                              <select  class="form-control custom" id="inputEmployeeAgeBand" name="EmpAgeBand" [(ngModel)]="EmpAgeBand" >
+                                  <option selected>Choose...</option>
+                                  <option>20-35</option>
+                                  <option>36-45</option>
+                                  <option>46-55</option>
+                                  <option>56-65</option>
+                                  <option>66-75</option>
+                                </select>
+                          </div>
+                           
+                          
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="exampleFormControlSelect1">Insurance Plan</label>
+                                    <select class="form-control custom" id="exampleFormControlSelect1" name="InsurancePlan"  [(ngModel)]="InsurancePlan" >
+                                        <option selected>Choose...</option>
+                                      <option>Plan1</option>
+                                      <option>Plan2</option>
+                                     
+                                    </select>
+                                  </div>
+
+                                  <div class="form-group col-md-4">
+                                      <label for="inputS_premium">Employee Premium</label>
+                                      <input type="text" class="form-control custom" id="inputsm-6" name="EmpPremium" [(ngModel)]="EmpPremium" placeholder="Employee Premium">
+                                    </div>
+                                  <div class="form-group col-md-4">
+                                      <label for="exampleFormControlInput1">cover days : </label>
+                                      <input type="text" class="form-control custom" id="exampleFormControlInput1" name="coverdays"  [(ngModel)]="coverdays"  placeholder="cover days">
+
+
+                                    </div>
+                            </div>
+                            <div class="form-group ">
+                                                <label for="exampleFormControlInput1">Total GMC  Premium : </label>
+                                                <input   type="text" class="form-control custom" id="exampleFormControlInput1"   [(ngModel)]="TotalGMCPremium"  placeholder="Total GMC premium">
+                                              </div>
+                                             
+        
+                              <div class="modal-footer">
+                                
+                                              <button class="btn btn-primary pull-left"  button type="submit"  >Submit</button>
+                                            
+                                              <button type="reset" class="btn btn-warning pull-left"  >Reset</button>  
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              </div>
+                            </form>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+         
+       <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+  </div>
+
+</div> -->
+

@@ -1,0 +1,185 @@
+<!-- <p>
+  certification works!
+</p> -->
+
+<!--certification  data starts -->
+<!-- <div class="tab-pane fade" id="nav-certification" role="tabpanel" aria-labelledby="nav-certification-tab"> -->
+<br>
+
+<div class="modal right fade" id="myModalcertificate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h3>Certification Details</h3>
+        <button type="button" class="close" data-dismiss="modal" (click)="newUserFormCer.reset()"
+          aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <!--modal Body-->
+      <div class="model-body">
+        <form class="tile" #newUserFormCer="ngForm" (ngSubmit)="onSubmitCer(newUserFormCer).reset()" autocomplete="on">
+          <div class="row">
+            <div class="col-md-6" *ngIf="createdBY">
+              <div class="form-group">
+                  <label>Employee Id </label><span>{{eid}}</span>
+                <!-- <label>Employee Id </label>
+                <input type="text" class="form-control" [(ngModel)]="Certification.employeeId" name="employeeId"
+                  required placeholder=" Emp Id" #Idemp="ngModel">
+                <span style="color:red" *ngIf="Idemp.invalid && Idemp.touched ">
+                  <span *ngIf="Idemp.errors.required">
+                    emp id Name is required.
+                  </span>
+                </span> -->
+              </div>
+
+            </div>
+            <div class="col-md-6" *ngIf="!createdBY">
+              <div class="form-group">
+                <label>Employee Id </label><span>{{Certification.employeeId}}</span>
+                <!-- <input type="text" class="form-control" [(ngModel)]="Certification.employeeId" name="employeeId" required
+                               placeholder=" Emp Id"  #Idemp="ngModel" disabled>
+                               <span style="color:red" *ngIf="Idemp.invalid && Idemp.touched ">
+                                   <span *ngIf="Idemp.errors.required">
+                                     emp id Name is required.
+                                   </span>
+                                 </span> -->
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> Certification Name: </label>
+                <input type="text" class="form-control" [(ngModel)]="Certification.certificationName"
+                  name="certificationName" required placeholder=" Certification Name" #cerName="ngModel">
+                <span style="color:red" *ngIf="cerName.invalid && cerName.touched ">
+                  <span *ngIf="cerName.errors.required">
+                    Certification Name is required.
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Issued by:</label>
+                <input type="text" class="form-control" [(ngModel)]="Certification.issuedBy" name="issuedBy" required
+                  placeholder="Authority/Organization" #Issued="ngModel">
+                <span style="color:red" *ngIf="Issued.invalid &&Issued.touched ">
+                  <span *ngIf="Issued.errors.required">
+                    Issued by is required.
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label> Date of issuse:</label>
+                <input type="date" class="form-control" [(ngModel)]="Certification.dateOfIssue" name="dateOfIssue"
+                  required placeholder="dd/mm/yyyy" #date="ngModel">
+                <span style="color:red" *ngIf="date.invalid &&date.touched ">
+                  <span *ngIf="date.errors.required">
+                    Date of issuse is required.
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- <div class="col-md-6">
+                        <div class="form-group">
+                             <label>flag: </label>
+                             <input type="text" class="form-control" [(ngModel)]="Certification.flag"  name="flag" required placeholder="flag">
+
+                                    </div>
+                                 </div> -->
+            <!-- <div class="col-md-6" *ngIf="createdBY">
+                    <div class="form-group">
+                         <label>createdBy: </label>
+                         <input type="text" class="form-control" [(ngModel)]="Certification.createdBy"  name="createdBy" required placeholder="created_By">
+
+                                </div>
+                             </div> -->
+            <!-- <div class="col-md-6" *ngIf="!createdBY" >
+                              <div class="form-group">
+                                   <label>updatedBy: </label>
+                                   <input type="text" class="form-control" [(ngModel)]="Certification.updatedBy"   name="updatedBy" required placeholder="updated_By"
+                                   #updatedby="ngModel">
+                                   </div>
+                                   </div> -->
+
+          </div>
+
+
+
+
+          <button type="submit" class="btn btn-primary float-right margin" [disabled]="newUserFormCer.form.invalid"
+            data-dismiss="modal" aria-label="Close" (click)="setCertificationDetails()"
+            *ngIf="!isUpdateBy">Save</button>
+
+          <button type="submit" class="btn btn-primary float-right margin" [disabled]="newUserFormCer.form.invalid"
+            data-dismiss="modal" aria-label="Close" (click)="updateCertificationdetails()"
+            *ngIf="isUpdateBy">Update</button>
+
+          <button class="btn btn-primary  float-right" (click)="newUserFormCer.reset()">Clear</button>
+          <button class="btn btn-info" data-dismiss="modal" aria-label="Close">Back</button>
+
+        </form>
+      </div>
+    </div><!-- modal-content -->
+  </div><!-- modal-dialog -->
+</div>
+
+
+<div class="row ">
+  <div class="col-md-11" style="margin-bottom: 25px;">
+    <form class="form-inline ">
+      <div class="input-group ">
+        <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" size="50"
+          placeholder="Search">
+        <div class="input-group-btn">
+          <h1></h1>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-md-1 " style="padding-left:40px">
+    <div class="input-group add">
+      <button type="add" class="btn btn-primary" data-target="#myModalcertificate" data-toggle="modal"
+        (click)="Addvalue(newUserFormCer)">Add</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+  <table class="table table-condensed tile">
+    <thead>
+      <tr>
+        <th>Emp Id</th>
+        <th>Certification Name</th>
+        <th>Issued by</th>
+        <th>Date Of Issuse</th>
+        <th>Edit</th>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let certifications of cerDetailsList| filter:searchText | paginate: { itemsPerPage: 10, currentPage: certificationcertificationDetails}; let i=index ">
+        <td>{{certifications.employeeId}}</td>
+        <td>{{certifications.certificationName}}</td>
+        <td>{{certifications.issuedBy}}</td>
+        <td>{{certifications.dateOfIssue}}</td>
+        <td> <img src="/assets/pe.png" width="35px" (click)="getDatabyId(certifications)"
+            data-target="#myModalcertificate" data-toggle="modal"></td>
+        <td><img src="assets/delete.png" width="20px" (click)="deleteCertificationDetails(certifications)"></td>
+    </tbody>
+
+  </table>
+</div>
+<!-- <pagination-controls class="pull-right" (pageChange)="certificationDetails = $event"></pagination-controls>  -->
+
+
+<!--certification  data ends -->

@@ -1,0 +1,183 @@
+<!-- <p>
+  skill works!
+</p> -->
+<!--skill data starts -->    
+<!-- <div class="tab-pane fade" id="nav-skill" role="tabpanel" aria-labelledby="nav-skill-tab"> -->
+   
+<!--skill data starts -->    
+
+  <br>
+       <div class="modal right fade" id="myModalskill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3>Skill Details</h3>
+         
+              <button type="button" class="close" data-dismiss="modal" (click)="newUserForm1.reset()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+    
+            <div class="modal-body">
+              <form class="tile" #newUserForm1="ngForm" (ngSubmit)="onSubmittitle(newUserForm1)" autocomplete="on">
+                <div class="row">
+                  <div class="col-md-6"*ngIf="CREATEDBY" >
+                      <div class="form-group" >
+                          <label> Employee Id: </label><span ><b>{{eid}} </b></span>
+                          <!-- <label> Employee Id: </label>
+                          
+                          <input type="text" class="form-control" name="key" [(ngModel)]="SKILLinfo.employee_id" name="employeeId" placeholder="employeeId"> -->
+                        </div>
+                      
+            </div>
+            <div class="col-md-6"*ngIf="!CREATEDBY" >
+                <div class="form-group" >
+                    <label> Employee Id: </label><span >{{SKILLinfo.employee_id}} </span>
+                    
+                    <!-- <input type="text" class="form-control" name="key" [(ngModel)]="SKILLinfo.employee_id" name="employeeId" placeholder="employeeId" disabled> -->
+                  </div>
+                
+      </div>
+            <div class="col-md-6">
+
+              <div class="form-group">
+                  <label for="skill1">Skill name:</label>
+
+                  <!-- <input type="number" class="form-control"  [(ngModel)]="SKILLinfo.skill_id" name="skill_id" placeholder="skill Id"> -->
+                        <!-- <select class="form-control" id="skill1" [(ngModel)]="skill_id" name="skill_id"
+                        required placeholder="Skill Id" #empid2="ngModel">
+                          <option>Java</option>
+                          <option>c</option>
+                          <option>.net</option>
+                          </select> -->
+                          <!-- <span style="color:red" *ngIf="empid2.invalid && empid2.touched ">
+                 
+                            <span *ngIf="empid2.errors.required">
+                                Skill Id  is required.
+                            </span>
+                            
+                          </span> -->
+              
+
+
+                        <select class="form-control" placeholder="Select skill name" name="skill_id" (change)="selectOption($event.target.value)"   [(ngModel)]="SKILLinfo.skill_id"   required placeholder="skill name">
+              <option>Select </option>
+              <option *ngFor="let skilltable of skillmasterArray "  [value]="skilltable.id" >{{ skilltable.skill_name}}</option>
+
+            </select>
+                   </div>
+                  </div>
+          </div>
+            
+          <div class="row">
+            
+                    
+                    <div class="col-md-6">
+                <div class="form-group">
+                    <label for="skill1"> Level Id: </label>
+                    <input type="number"  class="form-control" [(ngModel)]="SKILLinfo.level_id" name="level_id" 
+                    required placeholder="level Id" >
+                    <!-- <option>Basic Level</option>
+                    <option>Intermediate Level</option>
+                    <option>Advanced Level</option>
+                    </select> -->
+                    <!-- <span style="color:red" *ngIf="skill.invalid && skill.touched ">
+                    
+                       <span *ngIf="skill.errors.required">
+                        Level Id  is required.
+                       </span>
+                       
+                     </span> -->
+                  </div>
+                  
+                
+       </div>
+       <!-- <div class="col-md-6" *ngIf="CREATEDBY" >
+        <div class="form-group">
+            <label> Createdby: </label>
+            
+            <input type="text" class="form-control" [(ngModel)]="SKILLinfo.created_by" name="created_by" placeholder="created_by">
+          </div>
+        
+       
+</div>
+<div class="col-md-6" *ngIf="!CREATEDBY" >
+<div class="form-group">
+     <label>updatedBy: </label>
+     <input type="text" class="form-control" [(ngModel)]="SKILLinfo.update_by"   name="update_by" required placeholder="updated_By">
+     </div>
+     
+     </div> -->
+     <!-- <div class="col-md-6" >
+      <div class="form-group">
+           <label>Flag: </label>
+           <input type="text" class="form-control" [(ngModel)]="SKILLinfo.flag"   name="flag" required placeholder="flag">
+           </div>
+           
+           </div> -->
+         
+            </div>
+             
+            <button class="btn btn-primary  float-right margin" type="submit" [disabled]="newUserForm1.form.invalid"  data-dismiss="modal" aria-label="Close" (click)="setSkillInfo()"  *ngIf="!isUPDATEDBY">
+              Save
+              </button>
+              <button class="btn btn-primary  float-right margin" type="submit"  [disabled]="newUserForm1.form.invalid"  data-dismiss="modal" aria-label="Close"  (click)="updateSkilldetails(SKILLinfo)" *ngIf="isUPDATEDBY">
+        Update
+                </button>
+           
+            <button class="btn btn-primary  float-right" (click)="newUserForm1.reset()" >Clear</button>
+            <button class="btn btn-info" data-dismiss="modal" aria-label="Close" >Back</button> 
+  
+            </form>  
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
+
+
+       <div class="row ">
+        <div class="col-md-11" style="margin-bottom: 25px;">
+          <form class="form-inline ">
+            <div class="input-group ">
+              <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+              <div class="input-group-btn">
+                <h1></h1>
+              </div>
+            </div>
+          </form>
+          
+        </div> 
+        <div class="col-md-1 " style="padding-left:40px">
+        <div class="input-group add">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalskill"  (click)="addSkillvalue(newUserForm1)"  >Add</button>
+          </div>
+        </div>
+        </div>
+
+       <div class="row top table-responsive"style="margin-right: 0px; margin-left: 0px;">
+        <table class="table table-condensed  tile">
+          <thead class="two">
+                <tr>                   
+                  <th>Employee Id</th>
+               
+               <th>Skill Name</th>
+                  <th>Level Id</th>
+                  <th>Edit</th>
+               
+                </tr>
+                </thead>
+                <tr *ngFor="let tableData of skillInfoList | filter:key | paginate: { itemsPerPage: 20, currentPage:skillpage }; let i=index">
+                  <td>{{tableData.employee_id}}</td>
+                  <td>{{tableData.skill_id}} </td>
+              
+                  <td>{{tableData.level_id}}</td>
+                  <td><img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModalskill" (click)="getdatabyID(tableData)"></td>
+                  <!-- <td><img src="assets/delete.png" width="20px" (click)="deleteSkillInfo(tableData)"></td>   -->
+                </tr>
+                </table>
+      </div>
+
+    <pagination-controls class="pull-right" (pageChange)="skillpage = $event"></pagination-controls> 
+
+<!--skill data ends -->  
+

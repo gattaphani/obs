@@ -1,0 +1,227 @@
+<!-- <p>
+  business-unit works!
+</p> -->
+ <!-- bu starts -->
+ <!-- <div class="tab-pane fade" id="bu-details" role="tabpanel" aria-labelledby="nav-bu-tab"> -->
+  <br>
+  <!-- Modal -->
+  <div class="modal right fade" id="myModal12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h3>Employee BU</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormBu.reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <!-- <h4 class="modal-title" id="myModalLabel2">Employee BU</h4> -->
+        </div>
+
+        <div class="modal-body">
+          <form class="tile" #newUserFormBu="ngForm" (ngSubmit)="onSubmitbu(newUserFormBu)" autocomplete="on">
+            <div class="row">
+              <div class="col-md-6">
+                 
+               
+              <div class="form-group" *ngIf="isUpdate">
+                  <label>EmpId:</label>
+                  <span><b>{{businessUnitObj.employeeId}}</b></span>
+                 
+                  <!-- <input type="text" class="form-control" [(ngModel)]="businessUnitObj.employeeId" name="employeeId" 
+                    required placeholder="emp id"  #empid="ngModel">
+                    <span style="color:red" *ngIf="empid.invalid && empid.touched ">
+                      <span *ngIf="empid.errors.required">
+                        EmployeeId is required
+                      </span>
+                    </span> -->
+                </div>
+                <div class="form-group" *ngIf="!isUpdate">
+                    <label>EmpId:</label>
+                    <span><b>{{eid}}</b></span>
+                    <!-- <label> Employee Id: </label>
+                    <input type="text" class="form-control" [(ngModel)]="businessUnitObj.employeeId" name="employeeId" 
+                      required placeholder="emp id"  #empid="ngModel">
+                      <span style="color:red" *ngIf="empid.invalid && empid.touched ">
+                        <span *ngIf="empid.errors.required">
+                          EmployeeId is required
+                        </span>
+                      </span> -->
+                  </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- <div class="col-md-6">
+                <div class="form-group">
+                    <label> SBU: </label>
+                    <input type="number" class="form-control" [(ngModel)]="businessUnitObj.sbu" name="sbu" 
+                    required placeholder="Sbu"  #sbu="ngModel">
+                    <span style="color:red" *ngIf="sbu.invalid && sbu.touched ">
+                    
+                       <span *ngIf="sbu.errors.required">
+                           SBU  is mandatory.
+                       </span>
+                       
+                     </span>
+                  </div>
+                </div> -->
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                    <label>SBU:</label>
+                    <select class="form-control" [(ngModel)]="businessUnitObj.sbu" (change)="selectOption($event.target.value)" placeholder="Select SBU" name="emp02" 
+                    required placeholder="Qualification"
+                    #sbu="ngModel">
+                    <option>Select SBU</option>
+                    <option *ngFor="let sbu of subBusinessUnitlist" [value]="sbu.id">{{ sbu.name }}</option>
+                    </select>
+                    <span style="color:red" *ngIf="sbu.invalid && sbu.touched ">
+                    <span *ngIf="sbu.errors.required">
+                        SBU  is mandatory.
+                    </span> 
+                    </span>
+                    </div>
+                    </div>
+                    
+
+                <div class="col-md-6">
+                    
+                        <div class="form-group">
+                          <label>Status:</label>
+                          <select class="form-control" [(ngModel)]="businessUnitObj.status" (change)="selectOption($event.target.value)" placeholder="Select SBU" name="emp02" 
+                          required placeholder="Qualification"
+                          #status="ngModel">
+                          <option>Select Status</option>
+                          <option *ngFor="let estatus of employee_statuslist" [value]="estatus.status">{{ estatus.status }}</option>
+                          </select>
+                          <span style="color:red" *ngIf="status.invalid && status.touched ">
+                          <span *ngIf="status.errors.required">
+                              Status is mandatory.
+                          </span> 
+                          </span>
+                          </div>
+
+                </div>
+            </div>
+             <div class="row">
+              <!-- <div class="col-md-6" *ngIf="createdby1">
+              <div class="form-group">
+                  <label> createdby: </label>
+                  <input type="text" class="form-control" [(ngModel)]="businessUnitObj.createdby" name="createdby" 
+                  required placeholder="Createdby"  #sbucreate="ngModel">
+                  <span style="color:red" *ngIf="sbucreate.invalid && sbucreate.touched ">
+                  
+                     <span *ngIf="sbucreate.errors.required">
+                         SBU  is mandatory.
+                     </span>
+                     
+                   </span>
+                </div>
+              </div> -->
+              <!-- <div class="col-md-6"  *ngIf="!createdby1">
+                <div class="form-group">
+                    <label> updatedby: </label>
+                    <input type="text" class="form-control" [(ngModel)]="businessUnitObj.updatedby" name="updatedby" 
+                    required placeholder="updatedby"  #sbucreate="ngModel">
+                    <span style="color:red" *ngIf="sbucreate.invalid && sbucreate.touched ">
+                    
+                       <span *ngIf="sbucreate.errors.required">
+                           SBU  is mandatory.
+                       </span>
+                       
+                     </span>
+                  </div>
+                </div> -->
+
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                    <label for="sel1">flag:</label>
+                          <select class="form-control" [(ngModel)]="businessUnitObj.flag" id="sel1" name="flag"
+                           required placeholder="Status" #statusflag="ngModel">
+                           
+                            <option>true</option>
+                            <option>false</option>
+                            </select>
+                            <span style="color:red" *ngIf="statusflag.invalid && statusflag.touched ">
+                 
+                              <span *ngIf="statusflag.errors.required">
+                               Status is required.
+                              </span>
+                              
+                            </span>
+                     </div>
+              </div> -->
+          </div>
+                
+       
+         <!-- <button class="btn btn-primary  float-right margin" (click)="savecustomer()">Save</button> -->
+        <button class="btn btn-primary  float-right margin" type="submit" data-dismiss="modal" aria-label="Close"  *ngIf="!isUpdate" (click)="savebusinesunit();">
+          Save
+          </button>
+
+          <button class="btn btn-primary  float-right margin" type="submit" data-dismiss="modal" aria-label="Close"   *ngIf="isUpdate" (click)=" updatebusinesunitint()" >
+            Update
+                    </button>
+        <!-- <button class="btn btn-primary  float-right"  >Clear</button> -->
+        <button class="btn btn-primary  float-right" (click)="newUserFormBu.reset()" >Clear</button>
+        <button class="btn btn-info" data-dismiss="modal" aria-label="Close"  (click)="savedata();">Back</button> 
+
+
+          </form>
+        </div>
+
+      </div>
+      <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+  </div>
+  <!-- modal -->
+
+
+  <div class="row ">
+    <div class="col-md-11" style="margin-bottom: 25px;">
+      <form class="form-inline ">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+          <div class="input-group-btn">
+            <h1></h1>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-1 " style="padding-left:40px">
+      <div class="input-group add">
+        <button type="button" (click)="addbusinessUnit()" class="btn btn-primary" data-toggle="modal" data-target="#myModal12">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+    <table class="table table-condensed  tile">
+      <thead class="two">
+            <tr>  
+              <th>Employee Id</th>                 
+              <th>SBU</th>
+              <th>Status</th>
+              
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr> 
+            </thead>
+            <tr *ngFor="let empbu of empbuinfo | filter:key | paginate: { itemsPerPage: 5, currentPage: p } let i=index">
+                <td>{{empbu.employeeId}}</td>
+                <td>{{empbu.sbu}} </td>
+                <td>{{empbu.status}} </td>
+               
+              
+                
+              <td><img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModal12" (click)="getbusiness_data_byid(empbu)"></td>
+              <td><img src="/assets/delete.png" width="25px"(click)="empdelete(empbu)"></td>
+              
+            </tr>
+            </table>
+  </div>
+
+
+<!-- <pagination-controls  class="pull-right" (pageChange)="p = $event"></pagination-controls> -->
+<!-- bu ends -->

@@ -1,0 +1,177 @@
+
+.form-control {
+  box-shadow: none;
+  border-color: #ddd;
+}
+.form-control:focus {
+  border-color: #19aa8d; 
+}
+.login-form {
+      width: 350px;
+  margin: 0 auto;
+  padding: 30px 0;
+}
+  .login-form form {
+      color: #434343;
+  border-radius: 1px;
+    margin-bottom: 15px;
+      background: #fff;
+  border: 1px solid #f3f3f3;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+}
+.login-form h4 {
+  text-align: center;
+  font-size: 22px;
+      margin-bottom: 20px;
+}
+  .login-form .avatar {
+      color: #fff;
+  margin: 0 auto 30px;
+      text-align: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  z-index: 9;
+  background:#19aa8d;
+  padding: 15px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+  .login-form .avatar i {
+      font-size: 62px;
+  }
+  .login-form .form-group {
+      margin-bottom: 20px;
+  }
+.login-form .form-control, .login-form .btn {
+  min-height: 40px;
+  border-radius: 2px; 
+      transition: all 0.5s;
+}
+.login-form .close {
+      position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.login-form .btn {
+  background: #19aa8d;
+  border: none;
+  line-height: normal;
+}
+.login-form .btn:hover, .login-form .btn:focus {
+  background: #19aa8d;
+}
+  .login-form .checkbox-inline {
+      float: left;
+  }
+  .login-form input[type="checkbox"] {
+      margin-top: 2px;
+  }
+  .login-form .forgot-link {
+      float: right;
+  }
+  .login-form .small {
+      font-size: 13px;
+  }
+  .login-form a {
+      color: #19aa8d;
+  }
+
+
+
+  /*forgot password*/
+  .modal-newsletter {	
+		color: #999;
+		font-size: 15px;
+	}
+	.modal-newsletter .modal-content {
+		padding: 40px;
+		border-radius: 0;		
+		border: none;
+	}
+	.modal-newsletter .modal-header {
+		border-bottom: none;   
+        position: relative;
+		text-align: center;
+		border-radius: 5px 5px 0 0;
+	}
+	.modal-newsletter h4 {
+		color: #000;
+		text-align: center;
+		font-size: 30px;
+		margin: 0 0 25px;
+		font-weight: bold;
+		text-transform: capitalize;
+	}
+	.modal-newsletter .close {
+		background: #c0c3c8;
+		position: absolute;
+		top: -15px;
+		right: -15px;
+		color: #fff;
+		text-shadow: none;
+		opacity: 0.5;
+		width: 22px;
+		height: 22px;
+		border-radius: 20px;
+    font-size: 16px;
+    padding: 4px;
+	}
+	.modal-newsletter .close span {
+		position: relative;
+		top: -1px;
+	}
+	.modal-newsletter .close:hover {
+		opacity: 0.8;
+	}
+	.modal-newsletter .icon-box {
+		color: #19aa8d;		
+		display: inline-block;
+		z-index: 9;
+		text-align: center;
+		position: relative;
+    margin-bottom: 10px;
+    margin-left: 130px;
+	}
+	.modal-newsletter .icon-box i {
+		font-size: 110px;
+	}
+	.modal-newsletter .form-control, .modal-newsletter .btn {
+		min-height: 46px;
+		border-radius: 3px; 
+	}
+	.modal-newsletter .form-control {
+		box-shadow: none;
+		border-color: #dbdbdb;
+	}
+	.modal-newsletter .form-control:focus {
+		border-color: #19aa8d;
+		box-shadow: 0 0 8px #19aa8d
+	}
+    .modal-newsletter .btn {
+        color: #fff;
+        border-radius: 4px;
+		background: #19aa8d;
+		text-decoration: none;
+		transition: all 0.4s;
+        line-height: normal;
+		padding: 6px 20px;
+		min-width: 150px;
+        border: none;
+    }
+	.modal-newsletter .btn:hover, .modal-newsletter .btn:focus {
+		background: #19aa8d;
+		outline: none;
+	}
+	.modal-newsletter .input-group {
+		margin: 30px 0 15px;
+	}
+	.hint-text {
+		margin: 100px auto;
+		text-align: center;
+  }
+   .eye1 {
+    position: relative;
+    top: -24px;
+    right: 10px;
+}

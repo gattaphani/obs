@@ -1,0 +1,113 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <div class="container">
+                <h2>System Notifications</h2>
+                <p>Please click below to subscribe/ unsubscribe notifications</p>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    
+ <h4 class="panel-title">
+        <a style="color:blue"data-toggle="collapse" data-parent="#accordion" href="#collapse1">  Email Notifications</a>
+      </h4>  
+
+          </div>
+          <div id="collapse1" class="panel-collapse collapse">
+             <div class="panel-body"> 
+                        <div class="form-group">
+                               <label for="exampleFormControlInput1"> <i class="success">
+                                      notification_important
+                                             </i> Email Notification Alerts : </label> &nbsp; &nbsp;
+               
+                                                 <button  type="button"  (click)="emailEnable()"class="btn btn-success">   <i class="success">
+                                                    email
+                                                      </i> Enable</button> &nbsp;   &nbsp;
+                                             <button  class="btn btn-danger"  (click)="emailDisable()" type="buuton" > <i class="success">
+                                  unsubscribe
+                                  </i> Disable</button>       
+               
+                           
+                                </div>
+                        </div> 
+                     
+               </div> 
+               
+            <div [hidden]="!mailEnable">
+               
+                  <div class="alert alert-success alert-dismissible">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong>Success!</strong>Email notifications are Succesfully enabled
+                    </div>                 </div>
+                <div [hidden]="!maildisable">
+                <div class="alert alert-danger alert-dismissible">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong></strong>Email notifications are Succesfully disabled
+                    </div>                
+                    </div>
+                  </div>
+                 
+
+        <div class="panel panel-default">
+                <div class="panel-heading"  >
+                  <h4 class="panel-title">
+                    <a  style="color:blue"data-toggle="collapse" data-parent="#accordion" href="#collapse2">    SMS Notifications</a>
+                  </h4>
+                </div>
+           
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body"  >
+                 
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                  
+                          </h4>
+                        </div>
+    
+                          <div>
+                           <label for="exampleFormControlInput1"> <i class="material-icons">
+                               notification_important
+                               </i> SMS Notifications Alerts : </label> &nbsp; &nbsp;
+    
+                               <button  type="button" (click)="msgEnable()" class="btn btn-success">  <i class="material-icons">
+                                   message
+                                   </i> Enable</button>
+                  
+                          &nbsp;   &nbsp;
+                          <button type="button"    (click)="msgDisable()" class="btn btn-danger" > <i class="material-icons">
+                             chat_bubble
+                             </i> Disable</button>
+    
+                           </div>
+                      
+                       </div>
+                       </div>
+                       </div>
+    
+    
+                       <div [hidden]="!smsEnable">
+    
+                           <div class="alert alert-success alert-dismissible">
+                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                               <strong>Success!</strong> SMS notifications are Succesfully enabled
+    
+                       </div>
+                            
+                        <div [hidden]="!smsDisable">
+    
+                           <div class="alert alert-danger alert-dismissible">
+                               <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                               <strong>Success!</strong> SMS notifications disabled
+                             </div>
+                       </div>
+                            
+                      </div>
+                    </div>
+                   
+                     </body>
+                     </html>  

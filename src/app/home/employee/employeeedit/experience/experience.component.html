@@ -1,0 +1,404 @@
+<!-- <p>
+  experience works!
+</p> -->
+ <!-- experience starts-->       
+ <!-- <div class="tab-pane fade" id="nav-experience" role="tabpanel" aria-labelledby="nav-experience-tab"> -->
+  <br>
+  
+  
+  <!-- modal -->
+  <div class="modal right fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                      
+                              <div class="modal-header">
+                              
+                                <!-- <h4 class="modal-title" id="myModalLabel2">Employee Experience</h4> -->
+                                <h3>Experience</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormEmpExp.reset()"><span aria-hidden="true">&times;</span></button> 
+                              </div>
+                      
+                              <div class="modal-body">
+                                <form class="tile"  #newUserFormEmpExp="ngForm" (ngSubmit)="onSubmit(newUserFormEmpExp)" >
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                       
+  
+                                            <div class="form-group" *ngIf=isUpdate >
+                                              <label> Emp Id: </label>
+                                              <span>{{editemparrlist.employee_Id}}</span>
+                                              <!-- <input type="text" class="form-control" [(ngModel)]="editemparrlist.employee_Id" 
+                                              name="empname3"
+                                              required placeholder="Emp Id" #empid4="ngModel" disabled>
+                                              <span style="color:red" *ngIf="empid4.invalid && empid4.touched ">
+                                              
+                                                 <span *ngIf="empid4.errors.required">
+                                                  Empoyee id is required.
+                                                 </span>
+                                                 
+                                               </span> -->
+                                            </div>
+
+
+                                            <div class="form-group" *ngIf=!isUpdate>
+                                              <label> Emp Id: </label>
+                                              <span> <b>{{eid}}</b></span>
+                                              <!-- <input type="text" class="form-control" [(ngModel)]="editemparrlist.employee_Id" 
+                                              name="employee_Id"
+                                              required placeholder="Emp Id" #emexp1="ngModel">
+                                              <span style="color:red" *ngIf="emexp1.invalid && emexp1.touched ">
+                                              
+                                                 <span *ngIf="emexp1.errors.required">
+                                                  Empoyee id is required.
+                                                 </span>
+                                                 
+                                               </span> -->
+                                            </div>
+                                           </div>
+                                          
+  
+                                          <div class="col-md-6">
+                                       
+  
+                                            <!-- <div class="form-group" *ngIf = isCreated>
+                                              <label> created_by: </label>
+                                              <input type="text" class="form-control" [(ngModel)]="editemparrlist.created_by" 
+                                              name="empname03" 
+                                              required placeholder="Created by">
+                                            </div> -->
+  
+                                            <div class="form-group"  *ngIf = !isCreated>
+                                              <!-- <label> updated_by: </label> -->
+                                              <input type="hidden" class="form-control" [(ngModel)]="editemparrlist.created_by"  name="editemparrlist.created_by"
+                                              required placeholder="Updated by"  #emexp001="ngModel">
+                                             
+                                               <span style="color:red" *ngIf="emexp001.invalid && emexp001.touched ">
+                                              
+                                                 <span *ngIf="emexp001.errors.required">
+                                                  Created by id is required.
+                                                 </span> 
+                                                 
+                                               </span> 
+                                            </div>
+                                           </div>
+                                  </div>
+                                        
+                                        
+                                
+                                  <div class="row">
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label> Joining Date: </label>
+                                              <input type="date" class="form-control" [(ngModel)]="editemparrlist.joining_date" name="joining_date"
+                                              required placeholder="joining date" #emexp2="ngModel">
+                                              <span style="color:red" *ngIf="emexp2.invalid && emexp2.touched ">
+                                              
+                                                 <span *ngIf="emexp2.errors.required">
+                                                  Joining Date is required.
+                                                 </span>
+                                                 
+                                               </span>
+                                            </div>
+                                           </div> 
+                                      <div class="col-md-6" *ngIf=booleanValue>
+                                        <div class="form-group" *ngIf=!isUpdate >
+                                            <label> Relieving Date: </label>
+                                            <input type="date" class="form-control" [(ngModel)]="editemparrlist.exit_date" name="exit_date" 
+                                            required placeholder="Exit Date"  #emexp3="ngModel">
+                                            <span style="color:red" *ngIf="emexp3.invalid && emexp3.touched ">
+                                            
+                                               <span *ngIf="emexp3.errors.required">
+                                                Relieving Date is required.
+                                               </span>
+                                               
+                                             </span>
+                                          </div>
+                                         
+                                     </div> 
+
+
+                                       <div class="col-md-6" >
+                                        <div class="form-group" *ngIf=isUpdate >
+                                            <label> Relieving Date: </label>
+                                            <input type="date" class="form-control" [(ngModel)]="editemparrlist.exit_date" name="exit_date" 
+                                            required placeholder="Exit Date"  #emexp4="ngModel">
+                                            <span style="color:red" *ngIf="emexp4.invalid && emexp4.touched ">
+                                            
+                                               <span *ngIf="emexp4.errors.required">
+                                                Relieving Date is required.
+                                               </span>
+                                               
+                                             </span>
+                                          </div>
+                                         
+                                     </div>  
+                                     
+                                   </div>
+                                   <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label> Salary: </label>
+                                              <input type="number" class="form-control" [(ngModel)]="editemparrlist.salary" name="salary" 
+                                              required placeholder="Salary" #emexp5="ngModel">
+                                               <span style="color:red" *ngIf="emexp5.invalid && emexp5.touched ">
+                                              
+                                                 <span *ngIf="emexp5.errors.required">
+                                                  Salary is required.
+                                                 </span>
+                                                 <!-- pattern="^[0-9]*$" -->
+                                                 <!-- <span *ngIf="emexp5.errors.pattern">
+                                                  Enter Numbers only.
+                                                 </span> -->
+                                                 
+                                               </span> 
+                                            </div>
+                                           </div>
+                                       <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label> Location: </label>
+                                              <input type="text" class="form-control" [(ngModel)]="editemparrlist.location" name="editemparrlist.location" 
+                                              required placeholder="Location"  #emexp6="ngModel">
+                                              <span style="color:red" *ngIf="emexp6.invalid && emexp6.touched ">
+                                              
+                                                 <span *ngIf="emexp6.errors.required">
+                                                  Location is required.
+                                                 </span>
+                                                 
+                                               </span>
+                                            </div>
+                                           
+                                       </div>
+                                       
+                                     </div>
+                                     
+                                           <div class="row">
+                                              <div class="col-md-6">
+                                                 <div class="form-group">
+                                                     <label> Is Current Company: </label>
+                                                     <select class="form-control" [(ngModel)]="editemparrlist.is_current_company" name="is_current_company" 
+                                                     required placeholder="Current Company" #emexp7="ngModel">
+                                                     <!-- {{booleanValue|field}} -->
+                                                    <option [value]="1">Yes</option>
+                                                    <option [value]="0">No</option>
+                                                  </select>
+                                                  <span style="color:red" *ngIf="emexp7.invalid && emexp7.touched ">
+                                                     
+                                                    <span *ngIf="emexp7.errors.required">
+                                                      Please select.
+                                                    </span>
+                                                    
+                                                  </span>
+                                                   </div>
+                                                  
+                                              </div>
+                                              <div class="col-md-6">
+                                                 <div class="form-group">
+                                                     <label> Reference Name: </label> 
+                                                     <input type="text" class="form-control" [(ngModel)]="editemparrlist.first_Reference_Name" name="editemparrlist.first_Reference_Name" 
+                                                     required placeholder="reference Name"  #emexp8="ngModel">
+                                                      <span style="color:red" *ngIf="emexp8.invalid && emexp8.touched ">
+                                                     
+                                                        <span *ngIf="emexp8.errors.required">
+                                                          Reference Name is required.
+                                                        </span>
+                                                        
+                                                      </span> 
+                                                   </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                       <div class="form-group">
+                                                           <label> Reference Contact: </label> 
+
+                                                  
+                                                           <input type="text" class="form-control" [(ngModel)]="editemparrlist.first_Reference_Contact" name="editemparrlist.first_Reference_Contact"
+                                                            required placeholder="Reference Contact" pattern="^[0][6-9]\d{9}$|^[1-9]\d{9}$" 
+                                                            minlength="10" maxlength="10" #emexp9="ngModel">
+                                                              
+
+                                                               <span style="color:red" *ngIf="emexp9.invalid && emexp9.touched ">
+                                                             
+                                                                <span *ngIf="emexp9.errors.required">
+                                                                  Reference Contact is required.
+                                                                </span>
+
+                                                                <span *ngIf="emexp9.errors.pattern">
+                                                                  Reference Contact  should start with 6,7,8 or 9 is required.
+                                                                </span>
+                                                                <span *ngIf="emexp9.errors.minlength">
+                                                                  Reference Contact is required.
+                                                                </span>
+                                                              </span>  
+                                                         </div>
+                                                        
+                                                    </div>
+  
+                                                    <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label> Company Name: </label>
+                                                        <input type="text" class="form-control" [(ngModel)]="editemparrlist.company_name" name="editemparrlist.company_name" 
+                                                        required placeholder="Company Name"  #emexp10="ngModel">
+                                                        <span style="color:red" *ngIf="emexp10.invalid && emexp10.touched ">
+                                                        
+                                                           <span *ngIf="emexp10.errors.required">
+                                                            Company Name is required.
+                                                           </span>
+                                                           
+                                                         </span>
+                                                      </div>
+                                                    </div>
+                                                </div>
+  
+  
+                                                <!-- <div class="row">
+                                                  <div class="col-md-6">
+                                                     <div class="form-group">
+                                                         <!-- <label> Reference Contact2: </label> --
+                                                         <input type="hidden" class="form-control" [(ngModel)]="editemparrlist.second_Reference_Contact"
+                                                          name="editemparrlist.second_Reference_Contact" required placeholder="Reference Contact2">
+                                                          
+                                                       </div>
+                                                      
+                                                  </div>
+  
+                                                  <div class="col-md-6">
+                                                  <div class="form-group">
+                                                      <!-- <label> Reference Name2: </label> --
+                                                      <input type="hidden" class="form-control" [(ngModel)]="editemparrlist.second_Reference_Name" 
+                                                      name="editemparrlist.second_Reference_Name" 
+                                                      required placeholder="Reference Name2"  >
+                                                      <!-- <span style="color:red" *ngIf="empid13.invalid && empid13.touched ">
+                                                      
+                                                         <span *ngIf="empid13.errors.required">
+                                                          Reference Name2 is required.
+                                                         </span>
+                                                         
+                                                       </span> --
+                                                    </div>
+                                                  </div>
+                                              </div> -->
+                                              <!-- [disabled]="newUserFormEmpExp.invalid" -->
+  
+                                           <!-- <button class="btn btn-primary  float-right margin" >Save</button> -->
+                                           <!-- [disabled]="newUserFormEmpExp.invalid" -->
+                                           <button class="btn btn-primary  float-right margin" type="submit" 
+                                           data-dismiss="modal" aria-label="Close" 
+                                            *ngIf = !isUpdate (click)="saveEmpExp()" [disabled]="newUserFormEmpExp.invalid">Save</button>
+                                           
+                                            
+                                            
+  
+                                            <button class="btn btn-primary  float-right margin" type="submit" 
+                                            data-dismiss="modal" aria-label="Close" 
+                                            *ngIf = isUpdate (click)="updateEmpExp(emp)" >
+                                             Update
+                                            </button> 
+  
+                                           <button class="btn btn-primary  float-right" (click)="newUserFormEmpExp.reset()" >Clear</button>
+                                          
+                                           <button class="btn btn-info" data-dismiss="modal" aria-label="Close" >Cancel</button> 
+                                         </form> 
+                              </div>
+                      
+                            </div><!-- modal-content -->
+                          </div><!-- modal-dialog -->
+  </div><!-- modal -->
+            
+  
+  
+                        
+                    
+  
+  
+  <div class="row ">
+                        <div class="col-md-11" style="margin-bottom: 25px;">
+                          <form class="form-inline ">
+                            <div class="input-group ">
+                              <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                              <div class="input-group-btn">
+                                <h1></h1>
+                              </div>
+                            </div>
+                          </form>
+                        </div> 
+                        <div class="col-md-1 " style="padding-left:40px">
+                        <div class="input-group add">
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" 
+                          (click)="addempexp(newUserFormEmpExp)">Add</button>
+                          </div>
+                        </div>
+  </div>
+                   
+  
+  <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+                        <table class="table table-condensed  tile">
+                          <thead class="two">
+                                <tr>                   
+                                  <th>Emp Id</th>
+                                  <th>Company Name</th>
+                                  <th>Joining Date</th>
+                                  <th>Relieving Date</th>
+                                  <th>Salary</th>
+                                  <th>Location</th>
+                                  <th>Is current company</th>
+                                  <th>Reference name </th>
+                                  <th>Reference contact</th>
+                                  <!-- <th>Reference name2 </th>
+                                  <th>Reference contact2</th> -->
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tr *ngFor = "let emp of empexpdetails">
+                                  <td>
+                                      
+                                     {{emp.employee_Id}}
+                                    
+                                  </td>
+                                  <td>
+                                     {{emp.company_name}} 
+                                  </td>
+                                  <td>
+                                    {{emp.joining_date}} 
+                                  </td>
+                                  <td>
+                                    {{emp.exit_date}}
+                                  </td>
+                                  <td>
+                                    {{emp.salary}} 
+                                  </td>
+                                  <td>
+                                    {{emp.location}}     
+                                  </td>
+                                  <td>
+                                    {{emp.is_current_company}}
+                                </td>
+                                  <td>
+                                    {{emp.first_Reference_Name}}
+                                  </td>
+                                  <td>
+                                    {{emp.first_Reference_Contact}}
+                                  </td>
+                                  <!-- <td>
+                                    {{emp.second_Reference_Name}}
+                                  </td>
+                                  <td>
+                                    {{emp.second_Reference_Contact}}
+                                  </td>-->
+                                  <td>
+                                    <img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModal1" 
+                                     (click)="editempexpbyid(emp)">
+                                    
+                                    
+                                    
+                                    </td>
+                                    <td><img src = "/assets/delete.png" width="20px" (click)="deleteEmpExp(emp)"></td>
+                                </tr>
+                                </table>
+  </div>
+                                     
+                                  
+            
+    
+  <!-- experience ends--> 

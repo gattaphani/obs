@@ -1,0 +1,182 @@
+    <!-- education starts-->
+    <br/>
+      <div class="row">
+        <div class="col-md-11" style="margin-bottom: 25px;">
+          <form class="form-inline ">
+            <div class="input-group ">
+              <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+              <div class="input-group-btn">
+                <h1></h1>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-1 " style="padding-left:40px">
+          <div class="input-group ">
+            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="clickaddEdu(EmpEducationForm)"
+              data-target="#myModal5"> Add</button>
+          </div>
+        </div>
+      </div>
+      <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+        <table class="table table-condensed  tile">
+          <thead class="two">
+            <tr>
+              <th>Emp Id</th>
+              <th>Qualification</th>
+              <th>Year Of Passing</th>
+              <th>Percentage Marks</th>
+              <th>Institution Name</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let edu of getempeduarr">
+              <td>{{edu.employeeId}}</td>
+              <td>{{edu.qualification}}</td>
+              <td>{{edu.year_of_passing | date:"M/d/yy"}}</td>
+              <td>{{edu.percentage_marks}}</td>
+              <td>{{edu.institution_name}}</td>
+              <td><img src="assets/pe.png" width="30" data-toggle="modal" data-target="#myModal5"
+                  (click)="editEmpEduId(edu)"></td>
+              <td><img src="assets/delete.png" width="20px" (click)="deleteEmpEdu(edu)" /></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- Modal -->
+      <div class="modal right fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel5">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h3>Education</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                  aria-hidden="true">&times;</span></button>
+
+            </div>
+
+            <div class="modal-body">
+              <form class="tile" #EmpEducationForm="ngForm" (ngSubmit)="onSubmit1(EmpEducationForm)" autocomplete="on">
+                <div class="row">
+                  <div class="col-md-6" *ngIf="isCreatedEduby">
+                    <div class="form-group">
+                        <label> Emp Id: <span>{{eid}}</span></label>
+                      <!-- <label> Emp Id: </label>
+                      <input type="text" class="form-control" [(ngModel)]="editEduEmp.employeeId" name="employeeId" required
+                        placeholder="Employee Id" #emp01="ngModel">
+                        <span style="color:red" *ngIf="emp01.invalid && emp01.touched ">
+                          <span *ngIf="emp01.errors.required">
+                           Employee Id Is required
+                          </span>
+                        </span> -->
+                    </div>
+                  </div>
+
+                  <div class="col-md-6" *ngIf="isUpdatedEduby">
+                    <div class="form-group">
+                      <label> Emp Id: <span>{{editEduEmp.employeeId}}</span></label>
+                      <!-- <input type="text" class="form-control" [(ngModel)]="editEduEmp.employeeId" name="emp01" required placeholder="Employee Id"
+                #empn3="ngModel"> -->
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Year Of Passing:</label>
+                      <input type="date" class="form-control" [(ngModel)]="editEduEmp.year_of_passing" name="year_of_passing"
+                        placeholder="Year Of Passing" required #yop="ngModel">
+
+                      <span style="color:red" *ngIf="yop.invalid && yop.touched">
+                        <span *ngIf="yop.errors.required">
+                          Year Of Passing is required.
+                        </span>
+                      </span>
+
+                    </div>
+
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Qualification:</label>
+                      <select class="form-control" [(ngModel)]="editEduEmp.qualification"
+                        placeholder="Select Qualification" name="emp02" required placeholder="Qualification"
+                        #empn3="ngModel">
+                        <option *ngFor="let qual of EmpQualArray" [value]="qual.id">{{ qual.educationType }}</option>
+                      </select>
+
+                      <span style="color:red" *ngIf="empn3.invalid && empn3.touched ">
+
+                        <span *ngIf="empn3.errors.required">
+
+                          Qualification is required.
+                        </span>
+
+                      </span>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label> Institution Name: </label>
+                      <input type="text" class="form-control" [(ngModel)]="editEduEmp.institution_name"
+                        name="institution_name" required placeholder="Institution Name" #empn5="ngModel">
+
+                      <span style="color:red" *ngIf="empn5.invalid && empn5.touched ">
+
+                        <span *ngIf="empn5.errors.required">
+
+                          Institution Name is required.
+                        </span>
+
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label> Percentage Of Marks: </label>
+                      <input type="text" class="form-control" [(ngModel)]="editEduEmp.percentage_marks"
+                        name="percentage_marks" required placeholder="Percentage Of Marks" #empn4="ngModel">
+
+                      <span style="color:red" *ngIf="empn4.invalid && empn4.touched ">
+
+                        <span *ngIf="empn4.errors.required">
+
+                          Percentage Of Marks is required.
+                        </span>
+
+                      </span>
+                    </div>
+                    
+                  </div>
+
+                </div>
+                <button class="btn btn-primary  float-right margin" data-dismiss="modal" aria-label="Close"
+                  *ngIf=!isUpdatedEduby (click)="saveEmpEdu()" [disabled]="EmpEducationForm.invalid">Save</button>
+
+                <button class="btn btn-primary  float-right margin" data-dismiss="modal" aria-label="Close"
+                  *ngIf=isUpdatedEduby (click)="updateEdu(EmpEducationForm)">Update</button>
+
+
+                <button class="btn btn-primary   float-right" (click)="EmpEducationForm.reset()">Clear</button>
+                <button class="btn btn-info" data-dismiss="modal"><span aria-hidden="true"></span>Back</button>
+              </form>
+
+
+
+            </div>
+
+          </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+      </div><!-- modal -->
+    <!-- education ends-->

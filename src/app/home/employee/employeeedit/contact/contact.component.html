@@ -1,0 +1,349 @@
+<!-- <p>
+  contact works!
+</p> -->
+<!-- contact starts -->   
+<!-- <div class="tab-pane fade  " id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab"> -->
+
+<br>
+  <div class="row ">
+    <div class="col-md-11" style="margin-bottom: 25px;">
+      <form class="form-inline ">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="searchText" [(ngModel)]="searchText" size="50" placeholder="Search">
+          <div class="input-group-btn">
+          </div>
+        </div>
+      </form>
+    </div> 
+    <div class="col-md-1" style="padding-left:40px">
+    <div class="input-group add">
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModalcontact" (click)="valueAdd(newUserFormcontact)">Add
+      </button>
+      </div>
+    </div>
+    </div>
+
+    <div class="row top table-responsive"style="margin-right: 0px; margin-left: 0px;">
+        <table  class="table table-condensed tile " >
+            <thead  class="two">
+            <tr>
+                <th>Emp Id</th>
+                <th>Email</th>
+                <th>Personal mobile No </th>
+                 <th>Alternate Mobile No</th>
+                <th>CurrentAddressLine1                      
+                </th>  
+                <th>CurrentAddressLine2   </th>                    
+                <th>state name</th>  
+                <th>currentCity </th>    
+                
+                <th>Edit</th>
+                <th>Delete</th>
+             </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Cilist of contactList | filter:searchText | paginate: { itemsPerPage: 5, currentPage: contact };">
+                  <td>{{Cilist.empId}}</td>
+              <td>{{Cilist.email}}</td>
+              <td>{{Cilist.personalMobileNo}}</td>
+            
+            <td>{{Cilist.alternateMobileNo}}</td>
+          
+            <td>{{Cilist.currentAddressLine1}}</td>
+         
+           
+            <td>{{Cilist.currentAddressLine2}}</td>
+            <td>{{Cilist.currentState}}</td>
+           
+            <td>{{Cilist.currentCity}}</td>
+            <td><img src="assets/pe.png" width="35px" data-toggle="modal" data-target="#myModalcontact" (click)="getdatabyId(Cilist)"> </td>
+       
+            <td><img src="assets/delete.png" width="20px" (click)="deleteContactInformation(Cilist)"/></td>            
+             </tr> 
+            
+              </tbody>
+            </table>
+            
+          </div>
+
+  <div class="modal right fade" id="myModalcontact" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+  
+          <div class="modal-header">
+              <h3>Contact Details</h3>
+             
+                
+                  <button type="button"  (click)="newUserFormcontact.reset()" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  
+            
+        
+          </div>
+  
+          <div class="modal-body">
+           
+               
+
+ <form class="tile" #newUserFormcontact="ngForm" (ngSubmit)="onSubmitIns(newUserFormcontact)" autocomplete="on">
+   
+
+  <div class="row">
+
+    <div class="col-md-4" *ngIf="createdby">
+      <div class="form-group">
+          <label>Emp Id:  </label><span ><b>{{eid}}</b></span>
+          <!-- <label>Emp Id:   </label>
+          <input type="text"  class="form-control" [(ngModel)]="ContactInfo.emp_Id" name="emp_Id" placeholder="Emp Id" required >
+          -->
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="!createdby">
+        <div class="form-group">
+            <label>Emp Id:  </label><span >{{ContactInfo.empId}}</span>
+            <!-- <input type="text"  class="form-control" [(ngModel)]="ContactInfo.emp_Id" name="emp_Id" placeholder="Emp Id"  disabled> -->
+           
+          </div>
+        </div>
+
+
+        <div class="col-md-4">
+          <div class="form-group">
+              <label> Email: </label>
+            
+              
+              <input type="text" class="form-control"  id="email" [(ngModel)]="ContactInfo.email" name="Email" placeholder="Email"  #emailref="ngModel" required pattern="[[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$]*">
+              <!-- <span style="color:red"  *ngIf="emailref.errors &&(emailref.touched || emailref.dirty)"  > 
+               <div [hidden]="!emailref.errors?.pattern">
+                 Please Enter valid Email Address
+                 </div> 
+                 <span *ngIf="emailref.errors.required">
+                  Email is required
+                   </span>
+               </span> -->
+               <span style="color:red" *ngIf="emailref.invalid &&emailref.touched ">
+              
+                <span *ngIf="emailref.errors.required">
+                email is required.
+                </span>
+                <span *ngIf="emailref.errors.pattern">
+                 Enter Valid email Id
+               </span>
+             
+             
+            </span>
+            </div>
+          
+      </div>
+      <div class="col-md-4">
+          <div class="form-group">
+              <label> Personal Mobile No : </label>
+              <input type="text" class="form-control" [(ngModel)]="ContactInfo.personalMobileNo" name="personalMobileNo" required pattern="[[6-9]\d{9}$]*" placeholder="Personal MobileNo"
+               #personal="ngModel">
+              <span style="color:red" *ngIf="personal.invalid &&personal .touched ">
+              
+                 <span *ngIf="personal.errors.required">
+                  Personal  Mobile No is required.
+                 </span>
+                 <span *ngIf="personal.errors.pattern">
+                  Enter Valid Mobile No
+                </span>
+              
+              
+             </span>
+            </div>
+          </div>
+    
+    
+       
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Alternate Mobile No: </label>
+                    <input type="text" class="form-control" [(ngModel)]="ContactInfo.alternateMobileNo" name="alternateMobileNo" required pattern="[[6-9]\d{9}$]*" placeholder="Alternate MobileNo"
+                     #alternate="ngModel">
+                    <span style="color:red" *ngIf="alternate.invalid &&alternate .touched "> 
+                    
+                       <span *ngIf="alternate.errors.required">
+                       Alternate Mobile Number is required.
+                       </span>
+          
+                       <span *ngIf="alternate.errors.pattern">
+                        Enter Valid Mobile No
+                      </span>
+                   </span>
+                  </div>
+                  
+              </div>
+    
+          <div class="col-md-4">
+            <div class="form-group">
+                <label>Current City:  </label>
+                <input type="text"  class="form-control" [(ngModel)]="ContactInfo.currentCity" name="currentCity" required placeholder="currentCity" #currentcity="ngModel" required pattern="[a-zA-Z ]*" >
+                <span style="color:red" *ngIf="currentcity.invalid && currentcity.touched ">
+                    <span *ngIf="currentcity.errors.required">
+                    Current city is required
+                    </span>
+                 
+                    <span *ngIf="currentcity.errors.pattern">
+                      Enter Valid city name
+                    </span>
+                    </span>
+              </div>
+            </div>
+        
+            <div class="col-md-4">
+              <div class="form-group">
+                  <label> State: </label>
+                  <!-- <input type="text"   class="form-control" [(ngModel)]="ContactInfo.current_State" name="current_State" required placeholder="State" #state="ngModel"> -->
+                  <!-- <span style="color:red" *ngIf="state.invalid && state.touched ">
+                      <span *ngIf="state.errors.required">
+                      State is  required
+                      </span>
+                      <span [hidden]="!state.hasError('pattern')">
+                        Only Alphabets are allowed
+                         </span>
+    
+                      </span> -->
+    
+                   
+                      <select class="form-control" placeholder="Select state name"  name="currentState" [(ngModel)]="ContactInfo.currentState"   (change)="selectOption($event.target.value)"  required placeholder="state name">
+                        <option>Select </option>
+                        <option *ngFor="let Statenamelist of StateList" [value]="Statenamelist.id"  >{{ Statenamelist.stateName}} </option>
+                        <!-- <option *ngFor="let Statenamelist of StateList" [ngValue]="1">{{ Statenamelist.id}}</option>  value="{{}}"[value]="Statenamelist.id"  [selected]="ContactInfo.Statenamelist.id == Statenamelist.id"-->
+                        
+                      </select>
+    
+                </div>
+                
+            </div>
+        
+             </div>
+    
+    
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label>  Pincode: </label>
+                          <input type="text"  maxlength="6" name="pincode"   class="form-control" [(ngModel)]="ContactInfo.currentPin" name="currentPin" required  pattern="[[0-9]{6}]*" placeholder="Pincode" #pincode="ngModel">
+                             
+                          <span style="color:red" *ngIf="pincode.invalid && pincode.touched ">
+                              <span *ngIf="pincode.errors.required">
+                             Pincode is  required
+                              </span>
+                              <span [hidden]="!pincode.hasError('pattern')"  >
+                                Please Enter valid pincode!
+                                 </span>
+                                 <span [hidden]="!pincode.hasError('minlength')"  >
+                                  Please Enter atleast 6 pincode!
+                                   </span>
+                               
+                              </span>
+                          
+                        </div>
+                        </div>
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <label for="comment">Current Address1:</label>
+                          <input type="text" class="form-control" rows="5" cols="40"   [(ngModel)]="ContactInfo.currentAddressLine1"  name="currentAddressLine1" placeholder="Address" #currentadd="ngModel" required>  
+                          <span style="color:red" *ngIf="currentadd.invalid && currentadd.touched ">
+                              <span *ngIf="currentadd.errors.required">
+                             Current Address1 is  required
+                              </span>
+                              </span>
+                        </div> 
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label >Current Adress2 :</label>
+                        <input type="text" class="form-control"  [(ngModel)]="ContactInfo.currentAddressLine2"  name="currentAddressLine2"  placeholder="Address" #Permanent="ngModel" required>
+                        <span style="color:red" *ngIf="Permanent.invalid && Permanent.touched ">
+                            <span *ngIf="Permanent.errors.required">
+                                current Address2 is  required
+                            </span>
+                            </span>
+                      </div> 
+                </div>
+      
+              
+               
+      
+    
+        </div> 
+      
+              <div class="row">
+                 
+                <!-- <div class="col-md-4" *ngIf="createdby">
+                  <div class="form-group">
+                       <label>createdBy: </label>
+                       <input type="text" class="form-control" [(ngModel)]="ContactInfo.created_By"  name="created_By" required placeholder="created_By"
+                       #createdby="ngModel"> -->
+                       <!-- <span style="color:red" *ngIf="createdby.invalid &&createdby.touched ">
+                       <span *ngIf="createdby.errors.required">
+                        created By is required.
+                       </span>
+                       </span> -->
+                       <!-- </div>
+                    </div> -->
+                    <!-- <div class="col-md-4" *ngIf="!createdby">
+                        <div class="form-group">
+                             <label>updatedBy: </label>
+                             <input type="text" class="form-control" [(ngModel)]="ContactInfo.updated_By"   name="updated_By" required placeholder="updated_By"
+                             #updatedby="ngModel"> -->
+                             <!-- <span style="color:red" *ngIf="createdby.invalid &&createdby.touched ">
+                             <span *ngIf="createdby.errors.required">
+                              created By is required.
+                             </span>
+                             </span> -->
+                             <!-- </div>
+                          </div>
+                  -->
+              
+      
+                  <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="comment"> permanent Address:</label>
+                        <input type="text" class="form-control"    [(ngModel)]="ContactInfo.permanentAddressLine1"  name="permanentAddressLine1" placeholder="Address" #current="ngModel" required> 
+                        <span style="color:red" *ngIf="current.invalid && current.touched ">
+                            <span *ngIf="current.errors.required">
+                        permanent  Address is  required
+                            </span>
+                            </span>
+                      </div> 
+                </div>
+                             
+       
+      
+          
+          
+            
+          </div> 
+        
+      
+      
+      
+	
+
+    
+    <button type="submit" class="btn btn-primary float-right margin"  data-dismiss="modal" aria-label="Close" (click)="setContactInformation()" *ngIf="!isUpdate"> 
+    save
+     </button>
+     <button type="submit" class="btn btn-primary float-right margin"  data-dismiss="modal" aria-label="Close" (click)="updateContactdetails()" *ngIf="isUpdate" >
+      Update
+    </button>
+                <button class="btn btn-primary  float-right"  (click)="newUserFormcontact.reset()" >Clear</button>
+               <button class="btn btn-info" data-toggle="modal" data-target="#myModalcontact"  (click)="savedata();">Back</button> 
+    </form>
+
+
+
+
+          </div>
+  
+        </div>
+      </div>
+    
+
+</div>
+<!-- <pagination-controls class="pull-right" (pageChange)="contact = $event"></pagination-controls> -->
+ <!-- contact ends -->            

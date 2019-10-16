@@ -1,0 +1,130 @@
+<div class="app-title">
+    <div>
+      <h1><i class="fa fa-th-list"></i> User List</h1>
+    </div>
+      <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item">Masters</li>
+          <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
+        </ul>
+  </div>
+      <!-- <div class="row m-2">
+      <div class="col-md-10 pad" style="margin-bottom: 25px;">
+        <form class="form-inline ">
+          <div class="input-group ">
+            <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+            <div class="input-group-btn">
+              <h1></h1>
+            </div>
+          </div>
+        </form>
+      </div> 
+      <div class="col-md-1 pad  ml-2" style="margin-bottom: 25px;">
+      <div class="input-group ">
+          <button type="submit" (click)="value=!value" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+      </div> -->
+
+
+
+      <div class="row">
+          <form class="form-inline ">
+              <div class="input-group ">
+                <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+                <div class="input-group-btn">
+                  <h1></h1>
+                </div>
+              </div>
+            </form>
+        <div class="add">
+            <div class="input-group ">
+                <button type="submit" (click)="value=!value" class="btn btn-primary">Add</button>
+              </div>
+        </div>
+        </div>
+
+
+
+        <div class="row top">
+            <table class="table table-condensed  tile">
+              <thead class="two">
+                    <tr>
+                      <th>Id</th>
+                      <th  [class.active]="order === 'userList'"
+                      (click)="setOrder('userList')"
+                      class="mdl-data-table__cell--non-numeric">
+                      <span class="state">
+                      Name
+                    </span>
+                      </th>
+                      <th>Role</th>
+                      <th>Email</th>
+                      <th>Mobile</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of userlistarray | orderBy: order:reverse:'case-insensitive' | filter:key  | paginate: { itemsPerPage: 5, currentPage: p }; let i=index  ">
+                        <td>
+                          <div *ngIf="!user.isEditable">
+                          {{user.idList}}
+                        </div>
+                        <input  class="form-control" type="text" [(ngModel)]="user.idList" *ngIf="user.isEditable"/>
+                        </td>
+                        <td >
+                        <div *ngIf="!user.isEditable">
+                          {{user.userList}}
+                          </div>
+                          <input class="form-control" type="text" [(ngModel)]="user.userList" *ngIf="user.isEditable"/>
+                        
+                        </td>
+                        <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.roleList}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.roleList" *ngIf="user.isEditable"/>
+                        </td>
+                        <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.emailList}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.emailList" *ngIf="user.isEditable"/>
+                        </td>
+                        <td>
+                        <div *ngIf="!user.isEditable">
+                          {{user.mobileList}}
+                        </div>
+                        <input class="form-control" type="text" [(ngModel)]="user.mobileList" *ngIf="user.isEditable"/>
+                        </td>
+                        
+                      
+                      <td>
+                          <!-- <button class="btn btn-primary" (click)='bulist.isEditable =!bulist.isEditable' *ngIf="!bulist.isEditable">Edit</button> -->
+                          <button  class="btn" style="background: #009ee2;border:#009ee2;color:white;" *ngIf="user.isEditable" (click)="user.isEditable=!user.isEditable">Save</button>
+                          <img src="assets/pe.png" width="30px" (click)='user.isEditable =!user.isEditable' *ngIf="!user.isEditable">
+                          </td>
+                         <td><img src="assets/delete.png" width="20px" (click)="deleterow(i)"/></td>
+                        </tr>
+                        <tr>
+                            <td><input id="idlist" name="idlist" [(ngModel)]="idlist" *ngIf="value" type="text" class="form-control" placeholder="Enter id" required ></td>
+                            <td><input id="userlist" name="userlist" [(ngModel)]="userlist" *ngIf="value" type="text" class="form-control" placeholder="Enter State" required ></td>
+                            <td><input id="rolelist" name="rolelist" [(ngModel)]="rolelist" *ngIf="value" type="text" class="form-control" placeholder="Enter role" required ></td>
+                            <td><input id="emaillist" name="emaillist" [(ngModel)]="emaillist" *ngIf="value" type="text" class="form-control" placeholder="Enter email" required ></td>
+                            <td><input id="mobilelist" name="mobilelist" [(ngModel)]="mobilelist" *ngIf="value" type="text" class="form-control" placeholder="Enter mobile" required ></td>
+                            <td><button type="submit" class="btn btn-primary " *ngIf="value" (click)=saveButton()>Save</button></td>
+                             <td><button type="submit" class="btn btn-default " *ngIf="value" (click)=canceluserlist()>Cancel</button></td>
+                             
+                        </tr>
+                        </tbody>
+              </table>
+
+
+
+              
+              
+          </div>
+      
+  <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls>
+

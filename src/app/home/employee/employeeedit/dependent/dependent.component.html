@@ -1,0 +1,172 @@
+ <!-- dependent starts -->
+
+  <br>
+  <div class="row ">
+    <div class="col-md-11 " style="margin-bottom: 25px;">
+      <form class="form-inline ">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+          <div class="input-group-btn">
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-1 " style="padding-left:40px">
+      <div class="input-group add">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModaldependent" 
+        (click)="addnewdepartment(newUserFormDependent)" >
+          Add
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row top table-responsive" style="margin-right: 0px; margin-left: 0px;">
+    <table class="table table-condensed  tile">
+      <thead class="two">
+        <tr>
+          <th>Employee Id</th>
+          <th>Dependent Name</th>
+          <th>Relation</th>
+          <th>Date of Birth</th>
+          <th>Edit</th>
+          <th>delete</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let dependent of dependents| filter:key | paginate: { itemsPerPage: 100, currentPage:skillpage }; let i=index">
+        <td>
+          <div *ngIf="!dependent.isEditable">
+            {{dependent.employee_Id}}
+          </div>
+          <input class="form-control" type="text" [(ngModel)]="dependent.dependents" *ngIf="dependent.isEditable" />
+        </td>
+
+        <td>{{dependent.dependent_Name}}</td>
+        <td>{{dependent.relation}}</td>
+        <td>{{dependent.date_Of_Birth}}</td>
+        <td>
+          <img src="/assets/pe.png" width="35px" data-toggle="modal" data-target="#myModaldependent"  (click)=getdependentdetailsById(dependent)>
+        </td>
+        <td>
+          <img src="assets/delete.png" width="20px" (click)="deletedependentdata(dependent);">
+        </td>
+      </tr>
+    </table>
+  </div>
+
+
+
+  <div class="modal right fade" id="myModaldependent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h3>Dependent Details</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="newUserFormDependent.reset()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+        <!--modal Body-->
+        <div class="model-body">
+          <form class="tile" #newUserFormDependent="ngForm" (ngSubmit)="onSubmitDep(newUserFormDependent)" autocomplete="on">
+            <div class="row">
+              <div class="col-md-6"  *ngIf="createdByDependent">
+                  <div class="form-group">
+                      <!-- <label>Emp Id: </label>
+                      <input type="text" class="form-control" [(ngModel)]="dependentdetailss.employee_Id" name="employee_Id" required placeholder="employee_Id" >
+                    -->
+                    <label> Emp Id: <span [(ngModel)]="dependentdetailss.employee_Id" name="employee_Id" #id="ngModel">{{eid}}</span></label>
+    
+                    </div>
+              
+                  </div>
+                <div class="col-md-6" *ngIf="isupdateDependent">
+                    <div class="form-group">
+                        <label> Emp Id: <span [(ngModel)]="dependentdetailss.employee_Id" name="employee_Id" #id="ngModel">{{dependentdetailss.employee_Id}}</span></label>
+    
+  
+                    </div>
+                  </div>
+                </div>
+             
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Dependent name: </label>
+                  <input type="text" class="form-control" [(ngModel)]="dependentdetailss.dependent_Name" name="dependent_Name" required placeholder="Dependent name"
+                    #dependent="ngModel">
+                  <span style="color:red" *ngIf="dependent.invalid && dependent.touched ">
+
+                    <span *ngIf="dependent.errors.required">
+                      Dependent name is mandatory.
+                    </span>
+
+                  </span>
+                </div>
+
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Relation: </label>
+                  <select class="form-control" [(ngModel)]="dependentdetailss.relation" name="relation" required placeholder="Relation" #user2="ngModel">
+                    <option>Father</option>
+                    <option>Mother</option>
+                    <option>Brother</option>
+                  </select>
+
+                  <span style="color:red" *ngIf="user2.invalid && user2.touched ">
+
+                    <span *ngIf="user2.errors.required">
+                      Relation is required.
+                    </span>
+
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label> Date of birth: </label>
+                  <input type="date" class="form-control" [(ngModel)]="dependentdetailss.date_Of_Birth" name="date_Of_Birth" required placeholder="Date of birth"
+                    #user3="ngModel">
+                  <span style="color:red" *ngIf="user3.invalid && user3.touched ">
+
+                    <span *ngIf="user3.errors.required">
+                      Enter DOB
+                    </span>
+
+                  </span>
+                </div>
+
+              </div>
+              
+            </div>
+            <!-- <button class="btn btn-primary  float-right margin" (click)="savecustomer()">Save</button> -->
+            <button  class="btn btn-primary  float-right margin" type="submit"  [disabled]="newUserFormDependent.form.invalid" *ngIf="createdByDependent" 
+            (click)="onsavedependentdata()" data-dismiss="modal" >
+              Save
+            </button>
+            <button  class="btn btn-primary  float-right margin" type="submit" [disabled]="newUserFormDependent.form.invalid" *ngIf="isupdateDependent"
+            (click)="updatedependentdata()"  data-dismiss="modal" >
+              update
+            </button>
+            <button class="btn btn-primary  float-right" (click)="newUserFormDependent.reset()">Clear</button>
+            <button class="btn btn-info"  (click)="savedata()" data-dismiss="modal" aria-label="Close">Back</button>
+
+          </form>
+        </div>
+      
+      <!-- modal-content -->
+    </div>
+    <!-- modal-dialog -->
+
+  </div>
+  </div>
+  <!-- dependent ends -->

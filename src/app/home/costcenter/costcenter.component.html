@@ -1,0 +1,173 @@
+<div class="app-title">
+  <div>
+    <h1><i class="fa fa-th-list"></i> Cost Center</h1>
+  </div>
+  <!-- <ul class="app-breadcrumb breadcrumb">
+    <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+    <li class="breadcrumb-item">Masters</li>
+    <li class="breadcrumb-item active"><a href="#">Cost Center</a></li>
+  </ul> -->
+
+
+  <!-- <div class="col-md-6 pad">
+      <form class="form-inline pull-right">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+          <div class="input-group-btn">
+            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            <h1></h1>
+          </div>
+        </div>
+      </form>
+    </div> -->
+
+    <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item">Masters</li>
+          <li class="breadcrumb-item active"><a routerLink="/dashboard">Dashboard</a></li>
+      </ul>
+</div>
+<!-- <div class="wrapper">
+  <div class="container response">
+    <div class="row">
+      <div class="col-md-6">
+        <h4 style="font-size:25px"></h4>
+      </div>
+      <div class="col-md-6 pad">
+        <form class="form-inline pull-right">
+          <div class="input-group ">
+            <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+            <div class="input-group-btn">
+              <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              <h1></h1>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
+    <div class="row ">
+    <div class="col-md-11" style="margin-bottom: 25px;">
+      <form class="form-inline ">
+        <div class="input-group ">
+          <input type="text" class="form-control" name="key" [(ngModel)]="key" size="50" placeholder="Search">
+          <div class="input-group-btn">
+            <h1></h1>
+          </div>
+        </div>
+      </form>
+    </div> 
+    <div class="col-md-1 " style="padding-left:40px">
+    <div class="input-group add">
+        <button type="submit" (click)="value=!value;clear()" class="btn btn-primary ">Add</button>
+      </div>
+    </div>
+    </div>
+            <div class="row top table-responsive"style="margin-right: 0px; margin-left: 0px;">
+              <table class="table  table-condensed tile" >
+                <thead class="two">
+                  <tr>
+                    <th>
+                          Cost Center 
+                          
+                       
+                     </th> 
+                    <th>Edit</th>
+                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    *ngFor="let bulist of coscentergetlist |paginate: { itemsPerPage: 5, currentPage: p } | orderBy: order:reverse:'case-insensitive'| filter:key; let i=index ">
+                    <td>
+                      <div *ngIf="!bulist.isEditable">
+                        {{bulist.costCenterCode}}
+                      </div>
+                      <input type="text" [(ngModel)]="bulist.costCenterCode" *ngIf="bulist.isEditable" />
+                    </td>
+
+                    <td>
+                      <button class="btn" style="background: #009ee2;border:#009ee2;color:white;"
+                        *ngIf="bulist.isEditable" (click)="bulist.isEditable=!bulist.isEditable;saveUpdateValues(bulist);">Update</button>
+                      <img src="assets/pe.png" width="30" (click)='bulist.isEditable =!bulist.isEditable'
+                        *ngIf="!bulist.isEditable">
+                    </td>
+                    <!-- <td><img src="assets/delete.png" width="20" (click)="deleteCostCenter(bulist)" /></td> -->
+                  </tr>
+                  <tr>
+                    <td><input id="businessunit" name="businessunit" [(ngModel)]="costCenterCode" *ngIf="value" type="text"
+                        class="form-control" placeholder="Enter Cost Center" required></td>
+                    <td>
+                      <button type="submit" class="btn btn-primary " *ngIf="value" (click)=setCostcenterData()>Save</button>
+                      <button type="submit" class="btn btn-default " *ngIf="value" (click)=cancelbulist()>Cancel</button>
+                      </td>
+                  </tr>
+
+                </tbody>
+              </table>
+              <!-- <div class="input-group  ">
+                <button type="submit" (click)="value=!value" class="btn btn-primary"><i class="fa fa-plus"
+                    aria-hidden="true"></i></button>
+              </div> -->
+
+            </div>
+           <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls> 
+
+      
+
+            <!--new table code start-->
+        
+            <!-- <div class="app-title">
+              <div>
+                <h1><i class="fa fa-usd" aria-hidden="true"></i> Cost Center</h1>
+              </div>
+              <ul class="app-breadcrumb breadcrumb">
+                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+                <li class="breadcrumb-item">Masters</li>
+                <li class="breadcrumb-item active"><a href="#">Cost Center</a></li>
+              </ul>
+           </div>
+           <div class="form-group has-search">
+              <span class="fa fa-search form-control-feedback"></span>
+              <input type="text" class="form-control"  [(ngModel)]="searchText" placeholder="Search" style="width: 25%;">
+            </div>
+            
+
+          
+           <table class="table table-dark">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th [class.active]="order === 'id'" (click)="setOrder('id')" style="cursor:pointer">
+                   Cost Center <span [hidden]="reverse">▼</span>
+                <span [hidden]="!reverse">▲</span>
+                
+              </th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody  *ngFor="let bulist of costcenterlist | paginate: { itemsPerPage: 10, currentPage: p }| orderBy: order:reverse:'case-insensitive'| filter:searchText;let i = index">
+                <tr>
+                  <td>{{i+1}}</td>
+                  <td>{{bulist.costCenter}}</td>
+                  <td>
+                      <button class="btn" style="background: #009ee2;border:#009ee2;color:white;"
+                      *ngIf="bulist.isEditable" (click)="bulist.isEditable=!bulist.isEditable">Save</button>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:green" (click)='bulist.isEditable =!bulist.isEditable'
+                    *ngIf="!bulist.isEditable"></i></td>
+                  <td><i class="fa fa-trash-o" aria-hidden="true" style="color:red" (click)="deleterow(i)" ></i></td>
+                  <td>
+                      <button type="submit" class="btn btn-primary " *ngIf="value" (click)=saveBu()>Save</button>
+                      <button type="submit" class="btn btn-default " *ngIf="value"
+                        (click)=cancelbulist()>Cancel</button>
+                      </td>
+                </tr>
+                
+                
+              </tbody>
+            </table>
+            <div class="input-group  ">
+                <button type="submit" (click)="value=!value" class="btn btn-primary"><i class="fa fa-plus"
+                    aria-hidden="true"></i></button>
+              </div>
+            <pagination-controls class="pull-right" (pageChange)="p = $event"></pagination-controls> -->
